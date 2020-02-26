@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/imagenes/rh.ico">
+    <link rel="stylesheet" href="../static/css/estilo.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, scale = 1.0">
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Login</title>
+</head>
+
+
+<body>
+    <div class="jumbotron text-center" style="background-color: cadetblue;"></div>
+
+    <div class="Login">
+        <img class="Imagen" src="../static/imagenes/usuario.JPG">
+        <h1>Inicio de Sesi&oacuten RH</h1>
+        <form action="/login" method=["GET","POST"]>
+            <label class="Usuario">Usuario</label>
+            <input type="text" placeholder="Ingresa el Usuario" required name="Usuario">
+
+            <label class="Contraseña">Contraseña</label>
+            <input type="password" placeholder="Ingresa la Contraseña" required name="Contraseña">
+
+           <button  type="submit" class="btn btn-success" style="margin-left: 35%;">Aceptar</button>
+            <!--a href="/Usuario">Registrar Nuevo Usuario</a-->
+        </form>
+
+    </div>
+</body>
+
+</html>

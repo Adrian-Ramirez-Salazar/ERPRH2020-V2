@@ -1,0 +1,98 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Nueva Ciudad</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+    <ul>
+        <li><a href="/Deducciones">Deducciones</a>
+
+        </li>
+
+        <li><a href="/Percepciones">Percepciones</a>
+
+        </li>
+
+        <li><a href="/Ciudades">Ciudades</a>
+
+        </li>
+
+        <li><a href="/Estado">Estado</a>
+
+        </li>
+
+    </ul>
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> Nueva CIUDAD </h1><br>
+            <center>
+                <div class="col-sm-4">
+                    <form action="/insertarCiudad" method="post">
+
+                        <table>
+
+                            <!--tr>
+                                <td>
+                                    <label>ID:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number"  required name="id" >
+                                </td>
+                            </tr-->
+                            <tr>
+                                <td>
+                                    <label>NOMBRE:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" placeholder="Escribe Nombre de Ciudad"  required name="nombre">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>ID_ESTADO:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" required name="idestado">
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/CancelarC" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+<footer style="margin-bottom: 0">
+    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
+    <address style="text-align: center;"> Departamento RH </address>
+</footer>
+
+</html>

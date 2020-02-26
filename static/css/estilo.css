@@ -1,0 +1,176 @@
+.Login{
+    width: 320px;
+    height: 420px;
+    background: black;
+    color: white;
+    margin-left: 40%;
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.Login input[type = "text"],
+.Login input[type = "password"]{
+
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: white;
+    font-size: 15px;
+}
+
+.Login h1{
+    margin: 0%;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+body{
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.Login label{
+    margin: 0%;
+    padding: 0%;
+    font-weight: bold;
+    display: block;
+}
+
+.Login .Imagen{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    transform: translate(80%,-120%)
+}
+
+body{
+	
+    height:100%;
+}
+h3,h1{
+   color: steelblue;
+}
+header{
+    background-color: lightgray;
+    font-size: 25px;
+    font-weight: bold;
+    color: cornflowerblue;
+    padding: 25px;
+}
+footer{
+    background-color: lightgray;
+    font-size: 15px;
+    font-weight: bold;
+    color: cornflowerblue;
+    padding: 25px;
+	margin-top:50%;
+}
+
+footer>img{
+	display: inline;
+	float: left;
+	padding: 0px;
+}
+header>img{
+	display: inline;
+	float: left;
+	padding: 0px;
+}
+.imgPrincipal{
+    margin-left:30%;
+    width:400px;
+    height:500px;
+}
+
+input[type=submit]{
+	background-color: #336699;
+	font-weight: bold;
+	color: white;
+	font-size: 14px;
+	border-radius: 10px 10px 10px 10px;
+	border: 1px solid silver;
+}
+
+
+
+
+<!--ESTILO_DEL_HTML_MENÚ-->
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#MENU{
+	width: auto;
+	font-size: 18px;
+	height: 100px;
+	background: lightgray;
+	display: flex;
+	justify-content: flex-start;
+}
+
+header ul{
+	display: flex;
+	list-style: none;
+}
+
+header ul li a{
+	display: block;
+	padding: 12px 30px;
+	color:cornflowerblue;
+	text-decoration: none;
+}
+
+header ul ul{
+	position: absolute;
+	top:80px;
+	display: block;
+	background: #9dbfdd;
+	transform: translateX(60%);
+	opacity: 0;
+	transition: all .3s;
+}
+
+header ul li:hover ul{
+	opacity: 1;
+	transform: translateX(0%);
+}
+
+<!--ESTILO_DEL_SLIDER-->
+#contenedor img{
+	width:1000px;
+
+}
+
+#contenedor{
+	width: 700px;
+	margin: 30px auto;
+	overflow: hidden;
+}
+
+#contenedor ul{
+	list-style: none;
+	width: 2800px;
+	display: flex;
+
+	animation: slide 20s infinite alternate;
+}
+
+@keyframes slide{
+	0%{margin-left: 0px;}
+	20%{margin-left: 0px;}
+
+	25%{margin-left: -700px;}
+	45%{margin-left: -700px;}
+
+	50%{margin-left: -1400px;}
+	70%{margin-left: -1400px;}
+
+	75%{margin-left: -2100px;}
+	100%{margin-left: -2100px;}
+}
+
