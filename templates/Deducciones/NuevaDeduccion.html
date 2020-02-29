@@ -6,6 +6,7 @@
 
     <title> RH | Nueva Deduccion</title>
     <meta charset="utf-8">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="../../static/css/estilo.css">
@@ -30,6 +31,24 @@
 
         </li>
 
+        <li><a href="/Puestos">Puestos</a>
+
+		</li>
+
+		
+		<li><a href="/Horarios">Horarios</a>
+
+		</li>
+
+		
+		<li><a href="/Empleados">Empleados</a>
+
+		</li>
+
+		
+		<li><a href="/Departamentos">Departamentos</a>
+
+		</li>
     </ul>
 
 </header>
@@ -46,13 +65,11 @@
                     <form action="/insertarDeduccion" method="POST">
 
 
-                        <table>
+                        <table style="margin-left: 120%">
                             <tr>
                                 <td>
                                     <label>ID:</label>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <input type="number" name="id" required name="id">
                                 </td>
@@ -62,8 +79,6 @@
                                     <label>NOMBRE:</label>
 
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <input type="text" placeholder="Ingresa el nombre." required name="nombre">
 
@@ -74,8 +89,6 @@
                                     <label>Descripcion:</label>
 
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <input type="text" placeholder="Descripcion" required name="descripcion">
 
@@ -86,8 +99,6 @@
                                     <label>Porcentaje:</label>
 
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <input type="number" placeholder=" " required name="porcentaje">
 
@@ -95,8 +106,10 @@
                             </tr>
                         </table>
 
-                        <br> <br><br>
-                        <div class="form-group">
+                        <br>
+                        <br>
+                        <br>
+                        <div class="form-group" style="margin-left: 140%">
                             <input type="submit" value="Guardar" class="btn btn-primary">
 
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
