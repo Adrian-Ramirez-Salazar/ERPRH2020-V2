@@ -1,5 +1,5 @@
 <!Doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
@@ -32,24 +32,6 @@
 
 		</li>
 
-		<li><a href="/Puestos">Puestos</a>
-
-		</li>
-
-		
-		<li><a href="/Horarios">Horarios</a>
-
-		</li>
-
-		
-		<li><a href="/Empleados">Empleados</a>
-
-		</li>
-
-		
-		<li><a href="/Departamentos">Departamentos</a>
-
-		</li>
 	</ul>
 
 </header>
@@ -71,10 +53,7 @@
 			</form>
 			<br>
 
-			<button>
-			<a class="lista" href="/listarDeducciones" style="text-decoration: none;"> Lista de Deducciones</a>
-			</button>
-
+		<a href="/listarDeducciones" style="text-decoration: none;">
 			<table id="datos" class="table">
 				<thead>
 					<tr>
@@ -99,11 +78,13 @@
 						<td>
 							<a href="/eliminarDeduccion/{{dedu.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
 						</td>
-						<!--td><a href="ConsultaPercepcion.html"><img src="../../static/imagenes/consultar.jpeg"></a></td-->
 					</tr>
-					{% endfor %}
+				{% endfor %}
+				</tbody>
 			</table>
-			<br>
+</a>
+
+					<br>
 
 			<a href="/Regresar" class="btn btn-danger" style="text-decoration: none;">Regresar</a>
 

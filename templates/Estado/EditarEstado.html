@@ -3,7 +3,7 @@
     <head>
         <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
 
-	   <title> RH | Nuevo Estado</title>
+	   <title> RH | Editar Estado</title>
 	   <meta charset="utf-8">
        	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	   <meta name="viewport" content="width=device-width, scale=1.0">
@@ -29,25 +29,7 @@
 			<li><a href="/Estado">Estado</a>
 				
 			</li>
-                
-            <li><a href="/Puestos">Puestos</a>
-
-            </li>
-    
-            
-            <li><a href="/Horarios">Horarios</a>
-    
-            </li>
-    
-            
-            <li><a href="/Empleados">Empleados</a>
-    
-            </li>
-    
-            
-            <li><a href="/Departamentos">Departamentos</a>
-    
-            </li>
+				
 		</ul>
 
 	</header>
@@ -56,22 +38,12 @@
 <body >
 		<main>
         <div class="container" style="text-align: center;"><br>
-            <h1> NUEVO ESTADO </h1><br>
+            <h1> EDITAR ESTADO </h1><br>
             <center>
             <div class="col-sm-4">
                 <form action="/actualizarEstado/{{estado.0}}" method="post">
 
                     <table>
-                        <!--tr>
-                            <td>
-                                <label>ID:</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number"  required name="id" value="{{estado.0}}">
-                            </td>
-                        </tr-->
                         <tr>
                             <td>
                                 <label>NOMBRE:</label>
