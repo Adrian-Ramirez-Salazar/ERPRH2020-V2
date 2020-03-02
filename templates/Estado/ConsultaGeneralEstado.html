@@ -31,6 +31,24 @@
 
 		</li>
 
+		<li><a href="/Puestos">Puestos</a>
+
+		</li>
+
+		
+		<li><a href="/Horarios">Horarios</a>
+
+		</li>
+
+		
+		<li><a href="/Empleados">Empleados</a>
+
+		</li>
+
+		
+		<li><a href="/Departamentos">Departamentos</a>
+
+		</li>
 	</ul>
 
 </header>
@@ -49,9 +67,10 @@
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
+			<button><a class="lista" href="/listarEstado" role="button" class="btn btn-primary" style="text-decoration: none;"> Lista de
+					Estados
+				</a> </button>
 
-
-			<a class="lista" href="/listarEstado" style="text-decoration: none;">
 			<table id="datos" class="table">
 				<thead>
 					<tr>
@@ -76,9 +95,7 @@
 						</td>
 					</tr>
 					{% endfor %}
-			</table>
-			</a>
-				<br>
+			</table><br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>
 

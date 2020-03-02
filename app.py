@@ -1,8 +1,6 @@
-from flask import Flask, render_template, request, session, flash, url_for
+from flask import Flask, render_template, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import pyodbc
-from werkzeug.utils import redirect
-
 from Datos.usuarioDAO import UsuarioDAO
 
 
@@ -11,7 +9,7 @@ app.secret_key=b'yangars'
 
 
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
+                      'Server=ADILENE\SQLEXPRESS;'
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 
@@ -24,7 +22,6 @@ cursor = conn.cursor()
 @app.route('/')
 def index():
     return render_template('Login.html')
-
 
 
 
@@ -45,31 +42,6 @@ def login():
     except:
         flash('Datos incorrectos')
     return render_template('Comunes/principal.html')
-
-
-
-
-
-#Muestra el usuario que ingreso al sistema (USUARIOS DIRECTOS DE SQL)
-@app.route('/Usuario', methods=['POST'])
-def Usuario():
-    try:
-        server = 'localhost'
-        database = 'ERP2020'
-        username = session['usr']
-        password = session['pass']
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server}; SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
-        cursor = cnxn.cursor()
-        usr = session['usr']
-        interface = "Principal"
-        est = ("", "", "")
-        session['bandera'] = 1
-    except:
-        flash('Sesion terminada')
-    return render_template('Comunes/principal.html', usuario=usr, interfaz=interface, estado=est)
-
-
 
 
 
@@ -100,7 +72,9 @@ def Ciudades():
 @app.route('/Estado')
 def Estado():
     return render_template('Estado/ConsultaGeneralEstado.html')
-
+@app.route('/Puestos')
+def Puestos():
+    return render_template('Puestos/ConsultaGeneralPuestos.html')
 
 
 
@@ -138,11 +112,10 @@ def insertarDeduccion():
 #Lista General de Deducciones
 @app.route('/listarDeducciones')
 def listarDeducciones():
-        cursor = conn.cursor()
-        cursor.execute('Select * from RH.Deducciones;')
-        data = cursor.fetchall()
-        return render_template('Deducciones/Deducciones.html', deducciones=data)
-
+    cursor = conn.cursor()
+    cursor.execute('Select idDeduccion, nombre, descripcion, porcentaje from RH.Deducciones')
+    data = cursor.fetchall()
+    return render_template('Deducciones/Deducciones.html', deducciones=data)
 
 
 
