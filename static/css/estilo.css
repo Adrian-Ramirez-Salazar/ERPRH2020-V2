@@ -174,3 +174,7 @@ header ul li:hover ul{
 	100%{margin-left: -2100px;}
 }
 
+table#datos th,tr,td {
+    border: 2px solid black;
+    text-align: center;
+}

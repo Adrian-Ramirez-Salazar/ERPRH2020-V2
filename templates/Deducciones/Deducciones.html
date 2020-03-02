@@ -6,6 +6,8 @@
 
 	<title> RH | Deducciones</title>
 	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, scale=1.0">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../static/css/estilo.css">
@@ -30,6 +32,24 @@
 
 		</li>
 
+		<li><a href="/Puestos">Puestos</a>
+
+		</li>
+
+		
+		<li><a href="/Horarios">Horarios</a>
+
+		</li>
+
+		
+		<li><a href="/Empleados">Empleados</a>
+
+		</li>
+
+		
+		<li><a href="/Departamentos">Departamentos</a>
+
+		</li>
 	</ul>
 
 </header>
@@ -40,18 +60,22 @@
 		<br> <br> <br>
 		<div class="container" style="text-align: center;">
 			<h1> CONSULTA DE DEDUCCIONES </h1><bR>
-			<a href="/NuevaDeduccion" class="btn btn-primary"><img src="../../static/imagenes/add.gif">Nuevo</a><br><br>
+
+			<a href="/NuevaDeduccion" class="btn btn-primary"><img src="../../static/imagenes/add.gif">Nuevo</a>
+			<br>
+			<br>
 
 			<form action="/seleccionDeducciones" method="post">
 				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
-			<button><a class="lista" href="/listarDeducciones" role="button" class="btn btn-primary"> Lista de
-					Deducciones
-				</a> </button>
 
-			<table id="datos" class="table" style="margin-left: 450px;">
+			<button>
+			<a class="lista" href="/listarDeducciones" style="text-decoration: none;"> Lista de Deducciones</a>
+			</button>
+
+			<table id="datos" class="table">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -80,7 +104,10 @@
 					{% endfor %}
 			</table>
 			<br>
-			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
+
+			<a href="/Regresar" class="btn btn-danger" style="text-decoration: none;">Regresar</a>
+
+			<BR>
 		</div>
 
 	</main><br>

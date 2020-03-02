@@ -9,7 +9,11 @@ app.secret_key=b'yangars'
 
 
 conn = pyodbc.connect('Driver={SQL Server};'
+<<<<<<< HEAD
                       'Server=DESKTOP-7SLALA5\SQLEXPRESS;'
+=======
+                      'Server=ADILENE\SQLEXPRESS;'
+>>>>>>> 58f6b0cd590abcd4b58312130dfa4526dda81b13
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 
@@ -72,14 +76,16 @@ def Ciudades():
 @app.route('/Estado')
 def Estado():
     return render_template('Estado/ConsultaGeneralEstado.html')
-
 @app.route('/Puestos')
 def Puestos():
-   return render_template('Puestos/ConsultaGeneralPuestos.html')
+    return render_template('Puestos/ConsultaGeneralPuestos.html')
 
-@app.route('/nuevoPuesto')
-def nuevoPuesto():
-    return render_template('Puestos/NuevoPuesto.html')
+
+
+
+
+
+                                                    #Diferentes consultas para las DEDUCCIONES:
 
 @app.route('/NuevaDeduccion')
 def NuevaDeduccion():

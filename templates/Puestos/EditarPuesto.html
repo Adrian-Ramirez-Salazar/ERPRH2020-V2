@@ -5,46 +5,49 @@
 
 	   <title> RH | Nuevo Puesto</title>
 	   <meta charset="utf-8">
+       	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	   <meta name="viewport" content="width=device-width, scale=1.0">
 	   <link rel="stylesheet" href="css/bootstrap.min.css">
 	   <link rel="stylesheet" href="../../static/css/estilo.css">
 	</head>
 
 	<header id="MENU">
-        <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+        <img src="../../static/imagenes/RHH.png" width="70px" height="55px"> 
 		<ul>
 			<li><a href="/Deducciones">Deducciones</a>
-
+				
 			</li>
-
+				
 			<li><a href="/Percepciones">Percepciones</a>
-
+				
 			</li>
-
+				
 			<li><a href="/Ciudades">Ciudades</a>
-
+				
 			</li>
-
+				
 			<li><a href="/Estado">Estado</a>
-
+				
 			</li>
 
             <li><a href="/Puestos">Puestos</a>
 
-			</li>
-
-			<li><a href="/Departamentos">Departamentos</a>
-
-			</li>
-
-			<li><a href="/Empleados">Empleados</a>
-
-			</li>
-			<li><a href="/Horarios">Horarios</a>
-
-			</li>
-
-
+            </li>
+    
+            
+            <li><a href="/Horarios">Horarios</a>
+    
+            </li>
+    
+            
+            <li><a href="/Empleados">Empleados</a>
+    
+            </li>
+    
+            
+            <li><a href="/Departamentos">Departamentos</a>
+    
+            </li>
 		</ul>
 
 	</header>
@@ -73,34 +76,26 @@
                             <td>
                                 <label>NOMBRE:</label>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <input type="text" required name="nombre" placeholder="Ingresa el nombre." value="{{estado.1}}">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>SALARIO-MINIMO:</label>
+                                <label>SALARIO-MINIMO</label>
+                            </td>
+                            <td>
+                                <input type="text" required name="SALARIO" placeholder="Ingresa el salario." value="{{estado.2}}">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text"  placeholder="Ingresa el salario MIN." required name="salario">
+                                <label>SALARIO.MAXIMO</label>
                             </td>
-                        </tr>
-
-                        <tr>
                             <td>
-                                <label>SALARIO-MAXIMO:</label>
+                                <input type="text" required name="SALARIO" placeholder="Ingresa el salario." value="{{estado.2}}">
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <input type="text"  placeholder="Ingresa el salario MAX." required name="salario">
-                            </td>
-                        </tr>
-
                     </table>
 
                     <br> <br><br>
@@ -115,7 +110,7 @@
         </div>
 </body>
 
-	<footer style="margin-bottom: 0">
+	<footer style="margin-bottom: 0"> 
         <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
         <address style="text-align: center;"> Departamento RH  </address>
 	</footer>
