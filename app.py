@@ -9,7 +9,7 @@ app.secret_key=b'yangars'
 
 
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-AOPRKH0\SQLEXPRESS;'
+                      'Server=DESKTOP-7SLALA5\SQLEXPRESS;'
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 
