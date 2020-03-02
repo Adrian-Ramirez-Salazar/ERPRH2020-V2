@@ -145,6 +145,7 @@ def listarDeducciones():
 
 
 
+
 #Lista Individual de deducciones
 @app.route('/seleccionDeducciones', methods=['POST'])
 def seleccionDeducciones():
