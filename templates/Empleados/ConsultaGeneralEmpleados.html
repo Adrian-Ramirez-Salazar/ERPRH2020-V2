@@ -1,0 +1,103 @@
+<!Doctype html>
+<html>
+
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+	<title> RH | EMPLEADOS</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+	<img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+	<ul>
+		<li><a href="/Deducciones">Deducciones</a>
+
+		</li>
+
+		<li><a href="/Percepciones">Percepciones</a>
+
+		</li>
+
+		<li><a href="/Ciudades">Ciudades</a>
+
+		</li>
+
+		<li><a href="/Estado">Estado</a>
+
+		</li>
+
+	</ul>
+
+</header>
+
+
+<body>
+	<main>
+		<br> <br> <br>
+		<div class="container" style="text-align: center;">
+			<h1> CONSULTA DE EMPLEADOS </h1><bR>
+			<a href="/nuevoEmpleado" class="btn btn-primary">
+                <img src="../../static/imagenes/add.gif">Nuevo</a>
+                <a href="/editarEmpleado/"><img src="../../static/imagenes/editar.jpeg"></a>
+                        
+                        						
+							<a href="/eliminarEmpleado/"><img src="../../static/imagenes/eliminar.jpeg"></a>
+            <br><br>
+            
+
+			<form action="/seleccionCiudades" method="post">
+				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
+				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
+			</form>
+			<br>
+			<button><a class="lista" href="/listarEmpleados" role="button" class="btn btn-primary"> Lista de Ciudades</a>
+			</button>
+
+			<table class="table" style="margin-left: 10px;" border="1px">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>NOMBRE</th>
+						<th>A. PATERNO</th>
+						<th>A. MATERNO</th>
+                        <th>SEXO</th>
+                        <th>F. CONTRATACION</th>
+                        <th>F. NACIMIENTO</th>
+                        <th>SALARIO</th>
+                        <th>NSS</th>
+                        <th>ESTADO CIVIL</th>
+                        <th>DIAS VACACIONES</th>
+                        <th>DIAS PERMISO</th>
+                        <th>FOTOGRAFIA</th>
+                        <th>DIRECCION</th>
+                        <th>COLONIA</th>
+                        <th>CP</th>
+                        <th>ESCOLARIDAD</th>
+                        <th>COMISION</th>
+                        <th>DEPARTAMENTO</th>
+                        <th>PUESTO</th>
+                        <th>CIUDAD</th>
+					</tr>
+				</thead>
+				
+					
+					
+					
+			</table>
+			<br>
+			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
+		</div>
+
+	</main><br>
+</body>
+
+<footer style="margin-bottom: 0">
+	<img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
+	<address style="text-align: center;"> Departamento RH </address>
+</footer>
+
+</html>
