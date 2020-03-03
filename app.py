@@ -9,7 +9,11 @@ app.secret_key=b'yangars'
 
 
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
+<<<<<<< HEAD
+                      'Server=DESKTOP-7SLALA5\SQLEXPRESS;'
+=======
+                      'Server=ADILENE\SQLEXPRESS;'
+>>>>>>> 58f6b0cd590abcd4b58312130dfa4526dda81b13
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 
@@ -73,8 +77,8 @@ def Ciudades():
 def Estado():
     return render_template('Estado/ConsultaGeneralEstado.html')
 @app.route('/Puestos')
-def Puestos();
-    return render_template()''
+def Puestos():
+    return render_template('Puestos/ConsultaGeneralPuestos.html')
 
 
 
