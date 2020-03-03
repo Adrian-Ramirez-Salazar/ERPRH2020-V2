@@ -1,0 +1,218 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Nuevo Empleado</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+    <ul>
+        <li><a href="/Deducciones">Deducciones</a>
+
+        </li>
+
+        <li><a href="/Percepciones">Percepciones</a>
+
+        </li>
+
+        <li><a href="/Ciudades">Ciudades</a>
+
+        </li>
+
+        <li><a href="/Estado">Estado</a>
+
+        </li>
+
+    </ul>
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> Nuevo Empleado </h1><br>
+            <center>
+                <div class="col-sm-4">
+                    <form action="/insertarCiudad" method="post">
+
+                        <table>
+                            <!--------------->
+                            <tr>                                
+                                    <label>NOMBRE:</label>
+                            </tr>
+                                    <input type="text" placeholder="Escribe Nombre de Empleado"  required name="nombre">
+                            <tr></tr>
+                            <!-------------->
+                            <br>
+                            <br>
+                            <!---->
+                            <tr>
+                                <label>ID_EMPLEADO:</label>
+                            </tr>
+                                
+                                    <input type="number" required name="idempleado">
+                                
+                            <tr></tr>
+                            <br>
+                            <br>
+                            <!---->                           
+                             <tr>
+                                <label >APEIDO PATERNO:</label>
+                            </tr>
+                            
+                                <input type="text" required name="apaterno">
+                            <tr></tr>
+                            <br>
+                            <br>
+                            <!---->
+                            <tr>
+                                <label >APEIDO MATERNO:</label>
+                         </tr>
+                            
+                            <input type="text" required name="amaterno">
+                            <tr></tr>
+                            <br><br>
+                            <!--
+                            -->
+                            <tr>
+                                <label >SEXO: </label>
+                            </tr>
+                            
+                                 F<input type="radio" required name="F">
+                                M<input type="radio" required name="M">
+                            
+                            <tr></tr>
+                            <br><br>
+                            <!---->
+                            <tr>
+                              <label >CONTRATACION: </label>
+                            </tr>
+                            
+                                <input type="date" required name="fechaContratacion">
+                            <tr></tr>
+                            <br><br>
+                            <!---->
+                            <tr>
+                                <label >FECHA NACIMIENTO: </label>
+                              </tr>
+                              
+                                  <input type="date" required name="fechaNacimiento">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >SALARIO: </label>
+                              </tr>
+                              
+                                  <input type="number" required name="salario">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >NUMERO SEGURO SOCIAL: </label>
+                              </tr>
+                              
+                                  <input type="text" required name="nss">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >Estado Civil: </label>
+                              </tr>
+                              
+                                  <input type="text" required name="fechaContratacion">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >DIAS VACACION: </label>
+                              </tr>
+                              
+                                  <input type="number" required name="diasVacaciones">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >DIAS PERMISO: </label>
+                              </tr>
+                              
+                                  <input type="number" required name="diasPermiso">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >FOTOGRAFIA: </label>
+                              </tr>
+                              
+                                  <input type="file" required name="fotografia">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >DIRECCION: </label>
+                              </tr>
+                              
+                                  <input type="text" required name="direccion">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >COLONIA: </label>
+                              </tr>
+                              
+                                  <input type="text" required name="colonia">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >CODIGO POSTAL: </label>
+                              </tr>
+                              
+                                  <input type="number" required name="codigoPostal">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >ESCOLARIDAD: </label>
+                              </tr>
+                              
+                                  <input type="text" required name="escolaridad">
+                              <tr></tr>
+                              <br><br>
+                              <!---->
+                              <tr>
+                                <label >COMISION: </label>
+                              </tr>
+                              
+                                  <input type="number" required name="porcentajeComision">
+                              <tr></tr>
+                              <br><br>
+                        </table>
+
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/CancelarC" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+<footer style="margin-bottom: 0">
+    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
+    <address style="text-align: center;"> Departamento RH </address>
+</footer>
+
+</html>
