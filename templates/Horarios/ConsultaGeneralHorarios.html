@@ -4,7 +4,7 @@
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
 
-	<title> RH | Consulta Genera de Puestos</title>
+	<title> RH | Consulta General de Horarios</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, scale=1.0">
@@ -36,7 +36,7 @@
 		</li>
 
 		
-		<li><a href="/Horarios">Horarios</a>
+		<li><a href="#">Horarios</a>
 
 		</li>
 
@@ -55,52 +55,51 @@
 
 
 <body>
+	<center>
 	<main>
 		<br> <br> <br>
 		<div class="container" style="text-align: center;">
-			<h1> CONSULTA DE PUESTOS </h1><bR>
-			<a href="/nuevoPuesto" class="btn btn-primary"><img
+			<h1> CONSULTA DE HORARIOS </h1><bR>
+			<a href="/NuevoHorario" class="btn btn-primary"><img
 					src="../../static/imagenes/add.gif">Nuevo</a><br><br>
 
-			<form action="/seleccionPuesto" method="post">
+			<form action="/seleccionHorario" method="post">
 				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
-			<button><a class="lista" href="/listarPuesto" role="button" class="btn btn-primary" style="text-decoration: none;"> Lista de
-					Puestos
-				</a> </button>
-
+			<a class="lista" href="/listarHorarios" style="text-decoration: none;"></a>
 			<table id="datos" class="table">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>NOMBRE</th>
-						<th>SALARIO-MINIMO</th>
-						<th>SALARIO-MAXIMO</th>
+						<th>HoraInicio</th>
+						<th>HoraFin</th>
+						<th>Dias</th>
+						<th>Empleado</th> <!--IdEmpleado--> 
 						<th>EDITAR</th>
 						<th>ELIMINAR</th>
 					</tr>
 					<thead>
 						<tbody>
-							{% for esta in estados %}
+							{% for hor in horarios %}
 					<tr>
-						<td>{{esta.0}}</td>
-						<td>{{esta.1}}</td>
-						<td>{{esta.2}}</td>
-						<td>{{esta.3}}</td>
+						<td>{{hor.0}}</td>
+						<td>{{hor.1}}</td>
+						<td>{{hor.2}}</td>
+						<td>{{hor.3}}</td>
 						<td>
-							<a href="/editarPuesto/{{esta.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
+							<a href="/EditarHorario/{{hor.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
 						</td>
 						<td>
-							<a href="/eliminarPuesto/{{esta.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
+							<a href="/EliminarHorario/{{hor.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
 						</td>
 					</tr>
 					{% endfor %}
 			</table><br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>
-
+	</center>
 	</main><br>
 </body>
 

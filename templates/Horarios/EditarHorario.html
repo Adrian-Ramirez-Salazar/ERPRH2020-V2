@@ -1,0 +1,116 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+	   <title> RH | Editar Horario</title>
+	   <meta charset="utf-8">
+	   <meta name="viewport" content="width=device-width, scale=1.0">
+	   <link rel="stylesheet" href="css/bootstrap.min.css">
+	   <link rel="stylesheet" href="../../static/css/estilo.css">
+	</head>
+
+	<header id="MENU">
+        <img src="../../static/imagenes/RHH.png" width="70px" height="55px"> 
+		<ul>
+			<li><a href="/Deducciones">Deducciones</a>
+				
+			</li>
+				
+			<li><a href="/Percepciones">Percepciones</a>
+				
+			</li>
+				
+			<li><a href="/Ciudades">Ciudades</a>
+				
+			</li>
+				
+			<li><a href="/Estado">Estado</a>
+				
+			</li>
+
+            <li><a href="/Puestos">Puestos</a>
+
+            </li>
+    
+            
+            <li><a href="#">Horarios</a>
+    
+            </li>
+    
+            
+            <li><a href="/Empleados">Empleados</a>
+    
+            </li>
+    
+            
+            <li><a href="/Departamentos">Departamentos</a>
+    
+            </li>
+		</ul>
+
+	</header>
+
+
+<body >
+		<main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> Editar Horario </h1><br>
+            <center>
+            <div class="col-sm-4">
+                <form action="/actualizarhorario/{{hor.0}}" method="post">
+
+                    <table>
+                        <tr>
+                            <td>
+                                <label>ID:</label>
+                            </td>
+                        
+                       
+                            <td>
+                                <input type="number" required name="id" value="{{hor.0}}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>HoraInicio:</label>
+                            </td>
+                            <td>
+                                <input type="time"  placeholder="Ingresa la hora de inicio." required name="horaInicio" value="{{hor.1}}"> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>HoraFin</label>
+                            </td>
+                            <td>
+                                <input type="time"  placeholder="Ingresa la hora de fin" required name="horaFin" value="{{hor.2}}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Dias</label>
+                            </td>
+                            <td>
+                                <input type="text"  placeholder="Ingresa los dias " required name="Dias" value="{{hor.3}}">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br> <br><br>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-primary">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <a href="/CancelarE" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+            </center>
+        </div>
+</body>
+
+	<footer style="margin-bottom: 0"> 
+        <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
+        <address style="text-align: center;"> Departamento RH  </address>
+	</footer>
+</html>

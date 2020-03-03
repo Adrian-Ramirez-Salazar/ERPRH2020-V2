@@ -3,23 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 import pyodbc
 from Datos.usuarioDAO import UsuarioDAO
 
-
 app = Flask(__name__)
 app.secret_key=b'yangars'
 
 
 conn = pyodbc.connect('Driver={SQL Server};'
-<<<<<<< HEAD
-                      'Server=DESKTOP-7SLALA5\SQLEXPRESS;'
-=======
-                      'Server=ADILENE\SQLEXPRESS;'
->>>>>>> 58f6b0cd590abcd4b58312130dfa4526dda81b13
+                      'Server=WORKSTATION-PC\MSSQLSERVER2017;'
                       'Database=ERP2020;'
-                      'Trusted_Connection=yes;')
-
+                      'Trusted_Connectibon=yes;')
 cursor = conn.cursor()
-
-
 
 
 #Nos direcciona a la pagina para logearse
