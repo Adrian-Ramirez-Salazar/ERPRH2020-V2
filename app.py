@@ -6,11 +6,10 @@ from Datos.usuarioDAO import UsuarioDAO
 app = Flask(__name__)
 app.secret_key=b'yangars'
 
-
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=WORKSTATION-PC\MSSQLSERVER2017;'
+                      'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
                       'Database=ERP2020;'
-                      'Trusted_Connectibon=yes;')
+                      'Trusted_Connection=yes;')
 cursor = conn.cursor()
 
 
