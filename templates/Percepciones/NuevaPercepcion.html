@@ -58,7 +58,7 @@
                                     <label>DIAS A PAGAR:</label>
                                 </td>
                                 <td>
-                                    <input type="number" placeholder="Ingresa los dias."  required name="diaspagar">
+                                    <input type="number" placeholder="Ingresa los dias."  required min="1" name="diaspagar">
                                 </td>
                             </tr>
                         </table>
@@ -76,9 +76,6 @@
         </div>
 </body>
 
-<footer style="margin-bottom: 0">
-    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-    <address style="text-align: center;"> Departamento RH </address>
-</footer>
+  {% include 'Comunes/footer.html' %}
 
 </html>

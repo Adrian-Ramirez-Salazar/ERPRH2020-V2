@@ -75,7 +75,7 @@
                                 <label>SALARIO-MINIMO</label>
                             </td>
                             <td>
-                                <input type="text" required name="SALARIOMIN" placeholder="Ingresa el salario." value="{{puesto.2}}">
+                                <input type="number" required min="1" name="SALARIOMIN" placeholder="Ingresa el salario." value="{{puesto.2}}">
                             </td>
                         </tr>
                         <tr>
@@ -83,7 +83,7 @@
                                 <label>SALARIO-MAXIMO</label>
                             </td>
                             <td>
-                                <input type="text" required name="SALARIOMAX" placeholder="Ingresa el salario." value="{{puesto.3}}">
+                                <input type="number" required min="1" name="SALARIOMAX" placeholder="Ingresa el salario." value="{{puesto.3}}">
                             </td>
                         </tr>
                     </table>
@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-primary">
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <a href="/CancelarPuesto" class="btn btn-danger">Cancelar</a>
+                        <a href="/Puestos" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
             </div>
@@ -100,8 +100,5 @@
         </div>
 </body>
 
-	<footer style="margin-bottom: 0"> 
-        <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-        <address style="text-align: center;"> Departamento RH  </address>
-	</footer>
+  {% include 'Comunes/footer.html' %}
 </html>

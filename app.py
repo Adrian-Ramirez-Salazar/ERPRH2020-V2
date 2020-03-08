@@ -2,6 +2,7 @@ import pypyodbc
 from flask import Flask, render_template, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import pyodbc
+from werkzeug.utils import redirect
 from Datos.DeduccionesDAO import DeduccionesDAO
 from Datos.usuarioDAO import UsuarioDAO
 
@@ -9,7 +10,7 @@ app = Flask(__name__)
 app.secret_key=b'yangars'
 
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
+                      'Server=DESKTOP-7SLALA5\SQLEXPRESS;'
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 cursor = conn.cursor()
@@ -146,7 +147,7 @@ def insertarDeduccion():
             'INSERT INTO RH.Deducciones (idDeduccion, nombre, descripcion, porcentaje) VALUES (?, ?, ?, ?);',
                     (id,nombreDe,descripcion,porcentaje))
         conn.commit()
-        return render_template('Deducciones/Deducciones.html')
+        return redirect('/Deducciones')
 
 
 
@@ -169,7 +170,7 @@ def eliminarDeduccion(id):
     cursor = conn.cursor()
     cursor.execute('Delete from RH.Deducciones where idDeduccion={0}'.format(id))
     conn.commit()
-    return render_template('Deducciones/Deducciones.html')
+    return redirect('/Deducciones')
 
 
 
@@ -196,7 +197,7 @@ def actualizarDeduccion(id):
     cursor.execute('Update RH.Deducciones set idDeduccion=?, nombre=?, descripcion=?, porcentaje=? where idDeduccion=?;'
                    ,(idD, nombre,descripcion,porcentaje,id))
     conn.commit()
-    return render_template('Deducciones/Deducciones.html')
+    return redirect('/Deducciones')
 
 
 
@@ -224,7 +225,7 @@ def insertarPercepcion():
             'INSERT INTO RH.Percepciones (idPercepcion, nombre, descripcion, diasPagar) VALUES (?, ?, ?, ?);',
             (id, nombre, descripcion, diasP))
         conn.commit()
-        return render_template('Percepciones/ConsultaGeneralPercepciones.html')
+        return redirect('/Percepciones')
 
 
 
@@ -249,8 +250,7 @@ def eliminarPercepcion(id):
     cursor = conn.cursor()
     cursor.execute('Delete from RH.Percepciones where idPercepcion={0}'.format(id))
     conn.commit()
-    return render_template('Percepciones/ConsultaGeneralPercepciones.html')
-
+    return redirect('/Percepciones')
 
 
 
@@ -278,7 +278,7 @@ def actualizarPercepcion(id):
         'Update RH.Percepciones set idPercepcion=?, nombre=?, descripcion=?, diasPagar=? where idPercepcion=?;'
         , (idP, nombre, descripcion, diasP, id))
     conn.commit()
-    return render_template('Percepciones/ConsultaGeneralPercepciones.html')
+    return redirect('/Percepciones')
 
 
 
@@ -305,7 +305,9 @@ def insertarCiudad():
         'INSERT INTO RH.Ciudades (nombre, Estado_idEstado) VALUES (?, ?);',
         (nombre, idestado))
     conn.commit()
-    return render_template('Ciudades/ConsultaGeneralCiudad.html')
+
+
+    return redirect('/Ciudades')
 
 
 
@@ -329,7 +331,7 @@ def eliminarCiudad(id):
     cursor = conn.cursor()
     cursor.execute('Delete from RH.Ciudades where idCiudad={0}'.format(id))
     conn.commit()
-    return render_template('Ciudades/ConsultaGeneralCiudad.html')
+    return redirect('/Ciudades')
 
 
 
@@ -357,7 +359,7 @@ def actualizarCiudad(id):
         'Update RH.Ciudades set nombre=?, Estado_idEstado=? where idCiudad=?;'
          , (nombre,idEstado, id))
     conn.commit()
-    return render_template('Ciudades/ConsultaGeneralCiudad.html')
+    return redirect('/Ciudades')
 
 
 
@@ -381,7 +383,7 @@ def insertarEstado():
     cursor.execute(
         'INSERT INTO RH.Estado (nombre, siglas) VALUES (?, ?);', (nombre,siglas))
     conn.commit()
-    return render_template('Estado/ConsultaGeneralEstado.html')
+    return redirect('/Estado')
 
 
 
@@ -405,7 +407,7 @@ def eliminarEstado(id):
     cursor = conn.cursor()
     cursor.execute('Delete from RH.Estado where idEstado={0}'.format(id))
     conn.commit()
-    return render_template('Estado/ConsultaGeneralEstado.html')
+    return redirect('/Estado')
 
 
 
@@ -432,7 +434,7 @@ def actualizarEstado(id):
         'Update RH.Estado set nombre=?, siglas=? where idEstado=?;'
          , (nombre,siglas, id))
     conn.commit()
-    return render_template('Estado/ConsultaGeneralEstado.html')
+    return redirect('/Estado')
 
 
 
@@ -458,7 +460,7 @@ def insertarPuesto():
     cursor.execute(
         'INSERT INTO RH.Puestos (nombre, salarioMinimo, salarioMaximo) VALUES (?,?,?)',(nombre,salarioMin,salarioMax))
     conn.commit()
-    return render_template('Puestos/ConsultaGeneralPuestos.html')
+    return redirect('/Puestos')
 
 
 
@@ -481,7 +483,7 @@ def eliminarPuesto(id):
     cursor = conn.cursor()
     cursor.execute('Delete from RH.Puestos where idPuesto={0}'.format(id))
     conn.commit()
-    return render_template('Puestos/ConsultaGeneralPuestos.html')
+    return redirect('/Puestos')
 
 
 
@@ -507,7 +509,7 @@ def actualizarPuesto(id):
         'Update RH.Puestos set nombre=?, salarioMinimo=?, salarioMaximo=? where idPuesto=?;'
          , (nombre,salarioMIN, salarioMAX, id))
     conn.commit()
-    return render_template('Puestos/ConsultaGeneralPuestos.html')
+    return redirect('/Puestos')
 
 
 

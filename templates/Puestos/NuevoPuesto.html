@@ -46,7 +46,7 @@
                                 <label>SALARIO-MINIMO</label>
                             </td>
                             <td>
-                                <input type="text"  placeholder="Ingresa el salario." required name="SALARIOMIN">
+                                <input type="number"  placeholder="Ingresa el salario." required min="1" name="SALARIOMIN">
                             </td>
                         </tr>
                         <tr>
@@ -54,7 +54,7 @@
                                 <label>SALARIO-MAXIMO</label>
                             </td>
                             <td>
-                                <input type="text"  placeholder="Ingresa el salario." required name="SALARIOMAX">
+                                <input type="number" required min="1" placeholder="Ingresa el salario." name="SALARIOMAX">
                             </td>
                         </tr>
                     </table>
@@ -71,8 +71,5 @@
         </div>
 </body>
 
-	<footer style="margin-bottom: 0"> 
-        <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-        <address style="text-align: center;"> Departamento RH  </address>
-	</footer>
+  {% include 'Comunes/footer.html' %}
 </html>

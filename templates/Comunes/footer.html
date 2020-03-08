@@ -1,0 +1,58 @@
+<!Doctype html>
+
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+	<link rel="stylesheet" href="../../static/css/estilo.css">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, scale = 1.0">
+	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+<footer style="margin-bottom: 0">
+	<img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
+	<address style="text-align: center;"> Departamento RH </address>
+<center>
+	<script type="text/javascript">
+function startTime(){
+today=new Date();
+h=today.getHours();
+m=today.getMinutes();
+s=today.getSeconds();
+m=checkTime(m);
+s=checkTime(s);
+document.getElementById('reloj').innerHTML=h+":"+m+":"+s;
+t=setTimeout('startTime()',500);}
+function checkTime(i)
+{if (i<10) {i="0" + i;}return i;}
+window.onload=function(){startTime();}
+</script>
+
+<div id="reloj" style="font-size:20px;"></div>
+
+		<script type="text/javascript" >
+//<![CDATA[
+function makeArray() {
+for (i = 0; i<makeArray.arguments.length; i++)
+this[i + 1] = makeArray.arguments[i];}
+var months = new makeArray('Enero','Febrero','Marzo','Abril','Mayo',
+'Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+var date = new Date();
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var yy = date.getYear();
+var year = (yy < 1000) ? yy + 1900 : yy;
+document.write("" + day + " de " + months[month] + " del " + year);
+//]]>
+</script>
+</center>
+
+</footer>
+
+</html>

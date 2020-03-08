@@ -95,7 +95,7 @@
                                     <label>DIAS A PAGAR:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required name="diaspagar" placeholder="Ingresa los dias."
+                                    <input type="number" required min="1"  name="diaspagar" placeholder="Ingresa los dias."
                                         value="{{perce.3}}">
                                 </td>
                             </tr>
@@ -106,7 +106,7 @@
                             <input type="submit" value="Guardar" class="btn btn-primary">
 
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <a href="/CancelarP" class="btn btn-danger">Cancelar</a>
+                            <a href="/Percepciones" class="btn btn-danger">Cancelar</a>
                         </div>
                     </form>
                 </div>
@@ -114,9 +114,5 @@
         </div>
 </body>
 
-<footer style="margin-bottom: 0">
-    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-    <address style="text-align: center;"> Departamento RH </address>
-</footer>
-
+  {% include 'Comunes/footer.html' %}
 </html>

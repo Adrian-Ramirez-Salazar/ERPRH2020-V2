@@ -64,7 +64,7 @@
 
                                 </td>
                                 <td>
-                                    <input type="number" placeholder=" " required name="porcentaje">
+                                    <input type="number" required min="1" max="100" name="porcentaje">
 
                                 </td>
                             </tr>
@@ -87,9 +87,6 @@
     </main>
 </body>
 
-<footer style="margin-bottom: 0">
-    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-    <address style="text-align: center;"> Departamento RH </address>
-</footer>
+  {% include 'Comunes/footer.html' %}
 
 </html>
