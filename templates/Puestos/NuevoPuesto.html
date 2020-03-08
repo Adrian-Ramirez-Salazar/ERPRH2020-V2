@@ -12,43 +12,7 @@
 	</head>
 
 	<header id="MENU">
-        <img src="../../static/imagenes/RHH.png" width="70px" height="55px"> 
-		<ul>
-			<li><a href="/Deducciones">Deducciones</a>
-				
-			</li>
-				
-			<li><a href="/Percepciones">Percepciones</a>
-				
-			</li>
-				
-			<li><a href="/Ciudades">Ciudades</a>
-				
-			</li>
-				
-			<li><a href="/Estado">Estado</a>
-				
-			</li>
-    
-            <li><a href="/Puestos">Puestos</a>
-
-            </li>
-    
-            
-            <li><a href="/Horarios">Horarios</a>
-    
-            </li>
-    
-            
-            <li><a href="/Empleados">Empleados</a>
-    
-            </li>
-    
-            
-            <li><a href="/Departamentos">Departamentos</a>
-    
-            </li>
-		</ul>
+        <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
 
 	</header>
 
@@ -59,24 +23,22 @@
             <h1> NUEVO PUESTO </h1><br>
             <center>
             <div class="col-sm-4">
-                <form action="/insertarEstado" method="POST">
+                <form action="/insertarPuesto" method="POST">
                     <table>
-                        <tr>
+                        <!--tr>
                             <td>
                                 <label>ID:</label>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <input type="number" required name="id">
                             </td>
-                        </tr>
+                        </tr-->
                         <tr>
                             <td>
                                 <label>NOMBRE:</label>
                             </td>
                             <td>
-                                <input type="text"  placeholder="Ingresa el nombre." required name="nombre">
+                                <input type="text"  placeholder="Ingresa el nombre." required name="nombrePuesto">
                             </td>
                         </tr>
                         <tr>
@@ -84,7 +46,7 @@
                                 <label>SALARIO-MINIMO</label>
                             </td>
                             <td>
-                                <input type="text"  placeholder="Ingresa el salario." required name="SALARIO">
+                                <input type="text"  placeholder="Ingresa el salario." required name="SALARIOMIN">
                             </td>
                         </tr>
                         <tr>
@@ -92,7 +54,7 @@
                                 <label>SALARIO-MAXIMO</label>
                             </td>
                             <td>
-                                <input type="text"  placeholder="Ingresa el salario." required name="SALARIO">
+                                <input type="text"  placeholder="Ingresa el salario." required name="SALARIOMAX">
                             </td>
                         </tr>
                     </table>
@@ -101,7 +63,7 @@
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-primary">
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <a href="/CancelarE" class="btn btn-danger">Cancelar</a>
+                        <a href="/Puestos" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
             </div>

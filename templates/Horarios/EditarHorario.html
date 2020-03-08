@@ -5,9 +5,13 @@
 
 	   <title> RH | Editar Horario</title>
 	   <meta charset="utf-8">
-	   <meta name="viewport" content="width=device-width, scale=1.0">
-	   <link rel="stylesheet" href="css/bootstrap.min.css">
-	   <link rel="stylesheet" href="../../static/css/estilo.css">
+
+        <meta name="viewport" content="width=device-width, scale = 1.0">
+	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../static/css/estilo.css">
 	</head>
 
 	<header id="MENU">
@@ -68,7 +72,7 @@
                         
                        
                             <td>
-                                <input type="number" required name="id" value="{{hor.0}}">
+                                <input type="number" required name="idH" value="{{hor.0}}">
                             </td>
                         </tr>
                         <tr>
@@ -76,7 +80,7 @@
                                 <label>HoraInicio:</label>
                             </td>
                             <td>
-                                <input type="time"  placeholder="Ingresa la hora de inicio." required name="horaInicio" value="{{hor.1}}"> 
+                                <input type="number"  placeholder="Ingresa la hora de inicio." required name="horaInicio" value="{{hor.1}}">
                             </td>
                         </tr>
                         <tr>

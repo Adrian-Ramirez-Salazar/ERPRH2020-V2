@@ -178,3 +178,16 @@ table#datos th,tr,td {
     border: 2px solid black;
     text-align: center;
 }
+
+#botonesC {
+	margin-left: 400px;
+	margin-right: 400px;
+	text-decoration: none;
+		}
+
+#cerrarC {
+	padding: 40px;
+	margin-inline-start: 10px;
+	text-decoration: none;
+	margin-inline-end: 10px;
+		}

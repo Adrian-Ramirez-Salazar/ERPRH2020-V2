@@ -1,6 +1,8 @@
+import pypyodbc
 from flask import Flask, render_template, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import pyodbc
+from Datos.DeduccionesDAO import DeduccionesDAO
 from Datos.usuarioDAO import UsuarioDAO
 
 app = Flask(__name__)
@@ -17,6 +19,7 @@ cursor = conn.cursor()
 @app.route('/')
 def index():
     return render_template('Login.html')
+
 
 
 
@@ -42,34 +45,82 @@ def login():
 
 
 
-#Direccionamiento de interfaces:
+
+
+#Direccionamiento y vista general de datos e interfaces:
 
 @app.route('/cerrarSesion')
 def cerrarSesion():
     return render_template('Login.html')
 
+
 @app.route('/Regresar')
 def Regresar():
     return render_template('Comunes/principal.html')
 
+
 @app.route('/Deducciones')
 def Deducciones():
-    return render_template('Deducciones/Deducciones.html')
+    cursor = conn.cursor()
+    cursor.execute('SELECT *FROM RH.Deducciones;')
+    data = cursor.fetchall()
+    return render_template('Deducciones/Deducciones.html', deducciones=data)
+
+
 
 @app.route('/Percepciones')
 def Percepcciones():
-    return render_template('Percepciones/ConsultaGeneralPercepciones.html')
+    cursor = conn.cursor()
+    cursor.execute('SELECT *FROM RH.Percepciones;')
+    data = cursor.fetchall()
+    return render_template('Percepciones/ConsultaGeneralPercepciones.html', percepciones=data)
+
+
 
 @app.route('/Ciudades')
 def Ciudades():
-    return render_template('Ciudades/ConsultaGeneralCiudad.html')
+    cursor = conn.cursor()
+    cursor.execute('SELECT *FROM RH.Ciudades;')
+    data = cursor.fetchall()
+    return render_template('Ciudades/ConsultaGeneralCiudad.html', ciudades=data)
+
+
 
 @app.route('/Estado')
 def Estado():
-    return render_template('Estado/ConsultaGeneralEstado.html')
+    cursor = conn.cursor()
+    cursor.execute('SELECT *FROM RH.Estado;')
+    data = cursor.fetchall()
+    return render_template('Estado/ConsultaGeneralEstado.html', estados=data)
+
+
+
 @app.route('/Puestos')
 def Puestos():
-    return render_template('Puestos/ConsultaGeneralPuestos.html')
+    cursor = conn.cursor()
+    cursor.execute('SELECT *FROM RH.Puestos;')
+    data = cursor.fetchall()
+    return render_template('Puestos/ConsultaGeneralPuestos.html', puestos=data)
+
+
+
+@app.route('/Horarios')
+def Horarios():
+    return render_template('Horarios/ConsultaGeneralHorarios.html')
+
+
+
+@app.route('/Empleados')
+def Empleados():
+    return render_template('Empleados/ConsultaGeneralEmpleados.html')
+
+
+
+@app.route('/Departamentos')
+def Departamentos():
+    return render_template('Departamentos/ConsultaGeneralDepartamentos.html')
+
+
 
 
 
@@ -81,11 +132,6 @@ def Puestos():
 @app.route('/NuevaDeduccion')
 def NuevaDeduccion():
     return render_template('Deducciones/NuevaDeduccion.html')
-
-
-@app.route('/CancelarD')
-def CancelarDeduccion():
-    return render_template('Deducciones/Deducciones.html')
 
 
 #Insertar una Nueva Deduccion
@@ -102,15 +148,6 @@ def insertarDeduccion():
         conn.commit()
         return render_template('Deducciones/Deducciones.html')
 
-
-
-#Lista General de Deducciones
-@app.route('/listarDeducciones')
-def listarDeducciones():
-    cursor = conn.cursor()
-    cursor.execute('Select idDeduccion, nombre, descripcion, porcentaje from RH.Deducciones')
-    data = cursor.fetchall()
-    return render_template('Deducciones/Deducciones.html', deducciones=data)
 
 
 
@@ -136,6 +173,7 @@ def eliminarDeduccion(id):
 
 
 
+
 #Editar deducciones
 @app.route('/editarDeduccion/<id>')
 def editarDeduccion(id):
@@ -143,6 +181,7 @@ def editarDeduccion(id):
     cursor.execute('Select idDeduccion, nombre, descripcion, porcentaje from RH.Deducciones where idDeduccion={0}'.format(id))
     data = cursor.fetchall()
     return render_template('Deducciones/EditarDeduccion.html', deduccion=data[0])
+
 
 
 
@@ -164,15 +203,12 @@ def actualizarDeduccion(id):
 
 
 
+
                                                         # Diferentes consultas para las Percepciones
 
 @app.route('/NuevaPercepcion')
 def NuevaPercepcion():
     return render_template('Percepciones/NuevaPercepcion.html')
-
-@app.route('/CancelarP')
-def CancelarPercepcion():
-    return render_template('/Percepciones/ConsultaGeneralPercepciones.html')
 
 
 
@@ -192,15 +228,6 @@ def insertarPercepcion():
 
 
 
-        # Lista General de Percepciones
-@app.route('/listarPercepciones')
-def listarPercepciones():
-    cursor = conn.cursor()
-    cursor.execute('Select idPercepcion, nombre, descripcion, diasPagar from RH.Percepciones')
-    data = cursor.fetchall()
-    return render_template('Percepciones/ConsultaGeneralPercepciones.html', percepciones=data)
-
-
 
     # Lista Individual de Percepciones
 @app.route('/seleccionPercepciones', methods=['POST'])
@@ -215,6 +242,7 @@ def seleccionPercepciones():
 
 
 
+
     # Eliminar algun registro de las Percepciones
 @app.route('/eliminarPercepcion/<string:id>')
 def eliminarPercepcion(id):
@@ -222,6 +250,7 @@ def eliminarPercepcion(id):
     cursor.execute('Delete from RH.Percepciones where idPercepcion={0}'.format(id))
     conn.commit()
     return render_template('Percepciones/ConsultaGeneralPercepciones.html')
+
 
 
 
@@ -233,6 +262,7 @@ def editarPercepcion(id):
         'Select idPercepcion, nombre, descripcion, diasPagar from RH.Percepciones where idPercepcion={0}'.format(id))
     data = cursor.fetchall()
     return render_template('Percepciones/EditarPercepcion.html', perce=data[0])
+
 
 
 
@@ -255,15 +285,12 @@ def actualizarPercepcion(id):
 
 
 
+
+
                                                     #Diferentes consultas para las CIUDADES:
 @app.route('/nuevaCiudad')
 def nuevaCiudad():
     return render_template('Ciudades/NuevaCiudad.html')
-
-
-@app.route('/CancelarC')
-def CancelarCiudades():
-    return render_template('Ciudades/ConsultaGeneralCiudad.html')
 
 
 
@@ -280,15 +307,6 @@ def insertarCiudad():
     conn.commit()
     return render_template('Ciudades/ConsultaGeneralCiudad.html')
 
-
-
-# Lista General de Ciudades
-@app.route('/listarCiudades')
-def listarCiudades():
-    cursor = conn.cursor()
-    cursor.execute('Select idCiudad, nombre, Estado_idEstado from RH.Ciudades')
-    data = cursor.fetchall()
-    return render_template('Ciudades/ConsultaGeneralCiudad.html', ciudades=data)
 
 
 
@@ -352,11 +370,6 @@ def nuevoEstado():
     return render_template('Estado/NuevoEstado.html')
 
 
-@app.route('/CancelarE')
-def CancelarEstado():
-    return render_template('Estado/ConsultaGeneralEstado.html')
-
-
 
 #Insertar una Nuevo Estado
 @app.route('/insertarEstado', methods=['POST'])
@@ -371,14 +384,6 @@ def insertarEstado():
     return render_template('Estado/ConsultaGeneralEstado.html')
 
 
-
-# Lista General de Estados
-@app.route('/listarEstado')
-def listarEstados():
-    cursor = conn.cursor()
-    cursor.execute('Select idEstado, nombre, siglas from RH.Estado')
-    data = cursor.fetchall()
-    return render_template('Estado/ConsultaGeneralEstado.html', estados=data)
 
 
 
@@ -428,6 +433,177 @@ def actualizarEstado(id):
          , (nombre,siglas, id))
     conn.commit()
     return render_template('Estado/ConsultaGeneralEstado.html')
+
+
+
+
+
+
+
+                                                        #DIFERENTES CONSULTAS PARA LOS PUESTOS
+#nuevo Puesto
+@app.route('/nuevoPuesto')
+def nuevoPuesto():
+    return render_template('Puestos/NuevoPuesto.html')
+
+
+
+#Insertar un nuevo Puesto
+@app.route('/insertarPuesto', methods=['POST'])
+def insertarPuesto():
+    nombre = request.form['nombrePuesto']
+    salarioMin = request.form['SALARIOMIN']
+    salarioMax = request.form['SALARIOMAX']
+    cursor = conn.cursor()
+    cursor.execute(
+        'INSERT INTO RH.Puestos (nombre, salarioMinimo, salarioMaximo) VALUES (?,?,?)',(nombre,salarioMin,salarioMax))
+    conn.commit()
+    return render_template('Puestos/ConsultaGeneralPuestos.html')
+
+
+
+
+# Lista Individual de Puestos
+@app.route('/seleccionPuesto', methods=['POST'])
+def seleccionPuesto():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.Puestos where idPuesto={0}'.format(codigo))
+    data = cursor.fetchall()
+    return render_template('Puestos/ConsultaGeneralPuestos.html', puestos=data)
+
+
+
+ # Eliminar algun registro de los Puestos
+@app.route('/eliminarPuesto/<string:id>')
+def eliminarPuesto(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.Puestos where idPuesto={0}'.format(id))
+    conn.commit()
+    return render_template('Puestos/ConsultaGeneralPuestos.html')
+
+
+
+# Editar Puesto
+@app.route('/editarPuesto/<id>')
+def editarPuesto(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select idPuesto, nombre, salarioMinimo, salarioMaximo from RH.Puestos where idPuesto={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('Puestos/EditarPuesto.html', puesto=data[0])
+
+
+
+# Actualizar el registro editado
+@app.route('/actualizarPuesto/<id>', methods=['POST'])
+def actualizarPuesto(id):
+    nombre = request.form['nombrePuesto']
+    salarioMIN = request.form['SALARIOMIN']
+    salarioMAX = request.form['SALARIOMAX']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.Puestos set nombre=?, salarioMinimo=?, salarioMaximo=? where idPuesto=?;'
+         , (nombre,salarioMIN, salarioMAX, id))
+    conn.commit()
+    return render_template('Puestos/ConsultaGeneralPuestos.html')
+
+
+
+
+
+
+
+                                                        #DIFERENTES CONSULTAS PARA LOS HORARIOS
+
+#nuevo horario
+@app.route('/NuevoHorario')
+def nuevoHorario():
+    return render_template('Horarios/NuevoHorario.html')
+
+#cancelar Horarios
+@app.route('/CancelarHor')
+def cancelarHorario():
+    return render_template('Horarios/ConsultaGeneralHorarios.html')
+
+
+#Insertar un nuevo Horario
+@app.route('/insertarHorario', methods=['POST'])
+def insertarHorario():
+    horaInicio = request.form['horaInicio']
+    horaFin = request.form['horaFin']
+    dias = request.form['Dias']
+    idE = request.form['idEmple']
+    cursor = conn.cursor()
+    cursor.execute(
+        'INSERT INTO RH.Horarios (horaInicio, horaFin, dias,idEmpleado) VALUES (?,?,?,?)',(horaInicio,horaFin,dias,idE))
+    conn.commit()
+    return render_template('Horarios/ConsultaGeneralHorarios.html')
+
+
+
+
+
+
+
+
+
+                                                            #DIFERENTES CONSULTAS PARA LOS EMPLEADOS
+
+#nuevo Empleado
+@app.route('/nuevoEmpleado')
+def nuevoEmpleado():
+    return render_template('Empleados/nuevoEmpleado.html')
+
+#Cancelar nuevo empleado
+@app.route('/CancelarEmpleado')
+def cancelarEmpleado():
+    return render_template('Empleados/ConsultaGeneralEmpleados.html')
+
+
+#Insertar un nuevo empleado
+@app.route('/insertarEmpleado', methods=['POST'])
+def insertarEmpleado():
+    nombre = request.form['nombre']
+    apaterno = request.form['apaterno']
+    amaterno = request.form['amaterno']
+    sexo = request.form['sexo']
+    feContratacion = request.form['fechaContratacion']
+    feNacimiento = request.form['fechaNacimiento']
+    salario = request.form['salario']
+    seguroSocial = request.form['nss']
+    estadoCivil = request.form['estadoCivil']
+    diasVaca = request.form['diasVacaciones']
+    diasPermiso = request.form['diasPermiso']
+    foto = request.form['fotografia']
+    direccion = request.form['direccion']
+    colonia = request.form['colonia']
+    codigoPostal = request.form['codigoPostal']
+    escolaridad = request.form['escolaridad']
+    comision = request.form['porcentajeComision']
+    idDepa = request.form['idDepa']
+    idPuesto = request.form['idPuesto']
+    idCiudad = request.form['idCiudad']
+    cursor = conn.cursor()
+    cursor.execute(
+        'INSERT INTO RH.Empleados (nombre,apaterno,amaterno,sexo,fechaContratacion,fechaNacimiento,salario,nss,estadoCivil,diasVacaciones,diasPermiso,'
+        'fotografia,direccion,colonia,codigoPostal,escolaridad,porcentajeComision,idDepartamento,idPuesto,idCiudad) VALUES '
+        '(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(nombre,apaterno,amaterno,sexo,feContratacion,feNacimiento,salario,seguroSocial,
+                                                     estadoCivil,diasVaca,diasPermiso,foto,direccion,colonia,codigoPostal,escolaridad,
+                                                     comision,idDepa,idPuesto,idCiudad))
+    conn.commit()
+    return render_template('Empleados/ConsultaGeneralEmpleados.html')
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -5,49 +5,18 @@
 
 	   <title> RH | Nuevo HORARIO</title>
 	   <meta charset="utf-8">
-	   <meta name="viewport" content="width=device-width, scale=1.0">
-	   <link rel="stylesheet" href="css/bootstrap.min.css">
-	   <link rel="stylesheet" href="../../static/css/estilo.css">
+
+        <meta name="viewport" content="width=device-width, scale = 1.0">
+	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../static/css/estilo.css">
 	</head>
 
 	<header id="MENU">
         <img src="../../static/imagenes/RHH.png" width="70px" height="55px"> 
-		<ul>
-			<li><a href="/Deducciones">Deducciones</a>
-				
-			</li>
-				
-			<li><a href="/Percepciones">Percepciones</a>
-				
-			</li>
-				
-			<li><a href="/Ciudades">Ciudades</a>
-				
-			</li>
-				
-			<li><a href="/Estado">Estado</a>
-				
-			</li>
-    
-            <li><a href="/Puestos">Puestos</a>
 
-            </li>
-    
-            
-            <li><a href="#">Horarios</a>
-    
-            </li>
-    
-            
-            <li><a href="/Empleados">Empleados</a>
-    
-            </li>
-    
-            
-            <li><a href="/Departamentos">Departamentos</a>
-    
-            </li>
-		</ul>
 
 	</header>
 
@@ -60,7 +29,7 @@
             <div class="col-sm-4">
                 <form action="/insertarHorario" method="POST">
                     <table>
-                        <tr>
+                        <!--tr>
                             <td>
                                 <label>ID:</label>
                             </td>
@@ -69,13 +38,13 @@
                             <td>
                                 <input type="number" required name="id">
                             </td>
-                        </tr>
+                        </tr-->
                         <tr>
                             <td>
                                 <label>HoraInicio:</label>
                             </td>
                             <td>
-                                <input type="time"  placeholder="Ingresa la hora de inicio." required name="horaInicio">
+                                <input type="time"  placeholder="Ingresa la hora" required name="horaInicio">
                             </td>
                         </tr>
                         <tr>
@@ -83,7 +52,7 @@
                                 <label>HoraFin</label>
                             </td>
                             <td>
-                                <input type="time"  placeholder="Ingresa la hora de fin" required name="horaFin">
+                                <input type="time"  placeholder="Ingresa la hora" required name="horaFin">
                             </td>
                         </tr>
                         <tr>
@@ -91,7 +60,15 @@
                                 <label>Dias</label>
                             </td>
                             <td>
-                                <input type="text"  placeholder="Ingresa los dias " required name="Dias">
+                                <input type="number"  placeholder="Ingresa los dias " required name="Dias">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>ID_EMPLEADO</label>
+                            </td>
+                            <td>
+                                <input type="number"  placeholder=" " required name="idEmple">
                             </td>
                         </tr>
                     </table>

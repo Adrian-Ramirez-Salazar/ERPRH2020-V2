@@ -3,7 +3,7 @@
     <head>
         <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
 
-	   <title> RH | Nuevo Puesto</title>
+	   <title> RH | Editar Puesto</title>
 	   <meta charset="utf-8">
        	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	   <meta name="viewport" content="width=device-width, scale=1.0">
@@ -56,28 +56,18 @@
 <body >
 		<main>
         <div class="container" style="text-align: center;"><br>
-            <h1> NUEVO PUESTO </h1><br>
+            <h1> EDITAR PUESTO </h1><br>
             <center>
             <div class="col-sm-4">
-                <form action="/actualizarEstado/{{estado.0}}" method="post">
+                <form action="/actualizarPuesto/{{puesto.0}}" method="post">
 
                     <table>
-                        <tr>
-                            <td>
-                                <label>ID:</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number"  required name="id" value="{{estado.0}}">
-                            </td>
-                        </tr>
                         <tr>
                             <td>
                                 <label>NOMBRE:</label>
                             </td>
                             <td>
-                                <input type="text" required name="nombre" placeholder="Ingresa el nombre." value="{{estado.1}}">
+                                <input type="text" required name="nombrePuesto" placeholder="Ingresa el nombre." value="{{puesto.1}}">
                             </td>
                         </tr>
                         <tr>
@@ -85,15 +75,15 @@
                                 <label>SALARIO-MINIMO</label>
                             </td>
                             <td>
-                                <input type="text" required name="SALARIO" placeholder="Ingresa el salario." value="{{estado.2}}">
+                                <input type="text" required name="SALARIOMIN" placeholder="Ingresa el salario." value="{{puesto.2}}">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>SALARIO.MAXIMO</label>
+                                <label>SALARIO-MAXIMO</label>
                             </td>
                             <td>
-                                <input type="text" required name="SALARIO" placeholder="Ingresa el salario." value="{{estado.2}}">
+                                <input type="text" required name="SALARIOMAX" placeholder="Ingresa el salario." value="{{puesto.3}}">
                             </td>
                         </tr>
                     </table>
@@ -102,7 +92,7 @@
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-primary">
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <a href="/CancelarE" class="btn btn-danger">Cancelar</a>
+                        <a href="/CancelarPuesto" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
             </div>
