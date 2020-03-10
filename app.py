@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key=b'yangars'
 
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-7SLALA5\SQLEXPRESS;'
+                      'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 cursor = conn.cursor()
@@ -119,7 +119,10 @@ def Empleados():
 
 @app.route('/Departamentos')
 def Departamentos():
-    return render_template('Departamentos/ConsultaGeneralDepartamentos.html')
+    cursor = conn.cursor()
+    cursor.execute('SELECT *FROM RH.Departamentos;')
+    data = cursor.fetchall()
+    return render_template('Departamentos/ConsultaGeneralDepartamentos.html', departamentos=data)
 
 
 
@@ -138,14 +141,14 @@ def NuevaDeduccion():
 #Insertar una Nueva Deduccion
 @app.route('/insertarDeduccion', methods=['POST'])
 def insertarDeduccion():
-        id=request.form['id']
+       # id=request.form['id']
         nombreDe=request.form['nombre']
         descripcion=request.form['descripcion']
         porcentaje=request.form['porcentaje']
         cursor = conn.cursor()
         cursor.execute(
-            'INSERT INTO RH.Deducciones (idDeduccion, nombre, descripcion, porcentaje) VALUES (?, ?, ?, ?);',
-                    (id,nombreDe,descripcion,porcentaje))
+            'INSERT INTO RH.Deducciones (nombre, descripcion, porcentaje) VALUES (?, ?, ?);',
+                    (nombreDe,descripcion,porcentaje))
         conn.commit()
         return redirect('/Deducciones')
 
@@ -216,14 +219,14 @@ def NuevaPercepcion():
     # Insertar una Nueva Percepcion
 @app.route('/insertarPercepcion', methods=['POST'])
 def insertarPercepcion():
-        id = request.form['id']
+       # id = request.form['id']
         nombre = request.form['nombre']
         descripcion = request.form['descripcion']
         diasP=request.form['diaspagar']
         cursor = conn.cursor()
         cursor.execute(
-            'INSERT INTO RH.Percepciones (idPercepcion, nombre, descripcion, diasPagar) VALUES (?, ?, ?, ?);',
-            (id, nombre, descripcion, diasP))
+            'INSERT INTO RH.Percepciones (nombre, descripcion, diasPagar) VALUES ( ?, ?, ?);',
+            (nombre, descripcion, diasP))
         conn.commit()
         return redirect('/Percepciones')
 
@@ -297,16 +300,17 @@ def nuevaCiudad():
     # Insertar una Nueva Ciudad
 @app.route('/insertarCiudad', methods=['POST'])
 def insertarCiudad():
-   # id = request.form['id']
-    nombre = request.form['nombre']
-    idestado = request.form['idestado']
-    cursor = conn.cursor()
-    cursor.execute(
-        'INSERT INTO RH.Ciudades (nombre, Estado_idEstado) VALUES (?, ?);',
-        (nombre, idestado))
-    conn.commit()
-
-
+    try:
+        # id = request.form['id']
+        nombre = request.form['nombre']
+        idestado = request.form['idestado']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.Ciudades (nombre, Estado_idEstado) VALUES (?, ?);',
+            (nombre, idestado))
+        conn.commit()
+    except:
+       return ('REGISTROS INEXISTENTES: NO HAY RELACION CON LOS ESTADOS')
     return redirect('/Ciudades')
 
 
@@ -533,14 +537,17 @@ def cancelarHorario():
 #Insertar un nuevo Horario
 @app.route('/insertarHorario', methods=['POST'])
 def insertarHorario():
-    horaInicio = request.form['horaInicio']
-    horaFin = request.form['horaFin']
-    dias = request.form['Dias']
-    idE = request.form['idEmple']
-    cursor = conn.cursor()
-    cursor.execute(
-        'INSERT INTO RH.Horarios (horaInicio, horaFin, dias,idEmpleado) VALUES (?,?,?,?)',(horaInicio,horaFin,dias,idE))
-    conn.commit()
+    try:
+        horaInicio = request.form['horaInicio']
+        horaFin = request.form['horaFin']
+        dias = request.form['Dias']
+        idE = request.form['idEmple']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.Horarios (horaInicio, horaFin, dias,idEmpleado) VALUES (?,?,?,?)',(horaInicio,horaFin,dias,idE))
+        conn.commit()
+    except:
+        return ('NO EXISTE RELACION CON ALGUN EMPLEADO')
     return render_template('Horarios/ConsultaGeneralHorarios.html')
 
 
@@ -605,6 +612,76 @@ def insertarEmpleado():
 
 
 
+
+                                                        #DIFERENTES CONSULTAS PARA LOS DEPARTAMENTOS
+
+#nuevo Departamento
+@app.route('/nuevoDepartamento')
+def nuevoDepartamento():
+    return render_template('Departamentos/NuevoDepartamento.html')
+
+
+
+#Insertar un nuevo Departamento
+@app.route('/insertarDepartamento', methods=['POST'])
+def insertarDepartamento():
+    #id = request.form['id']
+    nombreDepa = request.form['nombreDepa']
+    cursor = conn.cursor()
+    cursor.execute(
+        'INSERT INTO RH.Departamentos (nombre) VALUES (?)',(nombreDepa))
+    conn.commit()
+    return redirect('/Departamentos')
+
+
+
+
+# Lista Individual de Departamentos
+@app.route('/seleccionDepartamento', methods=['POST'])
+def seleccionDepartamento():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.Departamentos where idDepartamento={0}'.format(codigo))
+    data = cursor.fetchall()
+    return render_template('Departamentos/ConsultaGeneralDepartamentos.html', departamentos=data)
+
+
+
+
+
+ # Eliminar algun registro de los Departamentos
+@app.route('/eliminarDepartamento/<string:id>')
+def eliminarDepartamento(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.Departamentos where idDepartamento={0}'.format(id))
+    conn.commit()
+    return redirect('/Departamentos')
+
+
+
+
+# Editar Departamento
+@app.route('/editarDepartamento/<id>')
+def editarDepartamento(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select nombre from RH.Departamentos where idDepartamento={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('Departamentos/EditarDepartamento.html', depa=data[0])
+
+
+
+
+# Actualizar el registro editado
+@app.route('/actualizarDepartamento/<id>', methods=['POST'])
+def actualizarDepartamento(id):
+    nombre = request.form['nombreD']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.Departamentos set nombre=? where nombre=?;' , (nombre, id))
+    conn.commit()
+    return redirect('/Departamentos')
 
 
 

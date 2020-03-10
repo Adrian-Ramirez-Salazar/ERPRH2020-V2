@@ -132,7 +132,6 @@
 			</form>
 			<br>
 
-			<a class="lista" href="/listarDepartamentos" style="text-decoration: none;">
 			<table id="datos" class="table">
 				<thead>
 					<tr>
@@ -145,20 +144,20 @@
 				<tbody>
 					{% for dep in departamentos %}
 					<tr>
-						<td>{{perc.0}}</td>
-						<td>{{perc.1}}</td>
+						<td>{{dep.0}}</td>
+						<td>{{dep.1}}</td>
 							<td>
-							<a href="/editarDepartamento/{{perc.0}}"><img src="../../static/imagenes/editar.jpeg">
+							<a href="/editarDepartamento/{{dep.0}}"><img src="../../static/imagenes/editar.jpeg">
 							</a>
 							</td>
 						<td>
-							<a href="/eliminarDepartamento/{{perc.0}}"><img src="../../static/imagenes/eliminar.jpeg">
+							<a href="/eliminarDepartamento/{{dep.0}}"><img src="../../static/imagenes/eliminar.jpeg">
 							</a>
 						</td>
 					</tr>
 					{% endfor %}
 			</table>
-			</a>
+
 				<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>
@@ -167,9 +166,6 @@
 </center>
 </body>
 
-<footer style="margin-bottom: 0">
-	<img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-	<address style="text-align: center;"> Departamento RH </address>
-</footer>
+  {% include 'Comunes/footer.html' %}
 
 </html>

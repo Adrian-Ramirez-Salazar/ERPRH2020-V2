@@ -6,36 +6,17 @@
 
     <title> RH | Nuevo Departamento</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, scale = 1.0">
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../static/css/estilo.css">
 </head>
 
 <header id="MENU">
 			<img src="../../static/imagenes/RHH.png" width="70px" height="55px">
-		<ul>
-			<li><a href="/Deducciones">Deducciones</a>
-				
-			</li>
-				
-			<li><a href="/Percepciones">Percepciones</a>
-				
-			</li>
-				
-			<li><a href="/Ciudades">Ciudades</a>
-				
-			</li>
-				
-			<li><a href="/Estado">Estado</a>
-				
-			</li>
 
-			<li><a href="#">Departamentos</a>
-				
-			</li>
-
-			
-		</ul>
 
 	</header>
 
@@ -49,24 +30,20 @@
                 <div class="col-sm-4">
                     <form action="/insertarDepartamento" method="post">
                          <table>
-                        <tr>
+                        <!--tr>
                             <td>
                                 <label>ID:</label>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <input type="number" required name="id">
                             </td>
-                        </tr>
+                        </tr-->
                         <tr>
                             <td>
                                 <label>NOMBRE:</label>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
-                                <input type="text"  placeholder="Ingresa el nombre." required name="nombre">
+                                <input type="text"  placeholder="Ingresa el nombre." required name="nombreDepa">
                             </td>
                         </tr>
                     </table>
@@ -76,7 +53,7 @@
                             <input type="submit" value="Guardar" class="btn btn-primary">
 
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <a href="/CancelarDep" class="btn btn-danger">Cancelar</a>
+                            <a href="/Departamentos" class="btn btn-danger">Cancelar</a>
                         </div>
                     </form>
                 </div>
@@ -85,9 +62,6 @@
     </main>
 </body>
 
-<footer style="margin-bottom: 0">
-    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-    <address style="text-align: center;"> Departamento RH </address>
-</footer>
+  {% include 'Comunes/footer.html' %}
 
 </html>

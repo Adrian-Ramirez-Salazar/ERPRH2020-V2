@@ -6,36 +6,15 @@
 
     <title> RH | Editar Departamento</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../static/css/estilo.css">
+       	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	   <meta name="viewport" content="width=device-width, scale=1.0">
+	   <link rel="stylesheet" href="css/bootstrap.min.css">
+	   <link rel="stylesheet" href="../../static/css/estilo.css">
 </head>
 
 <header id="MENU">
 			<img src="../../static/imagenes/RHH.png" width="70px" height="55px">
-		<ul>
-			<li><a href="/Deducciones">Deducciones</a>
-				
-			</li>
-				
-			<li><a href="/Percepciones">Percepciones</a>
-				
-			</li>
-				
-			<li><a href="/Ciudades">Ciudades</a>
-				
-			</li>
-				
-			<li><a href="/Estado">Estado</a>
-				
-			</li>
 
-			<li><a href="#">Departamentos</a>
-				
-			</li>
-
-			
-		</ul>
 
 	</header>
 
@@ -47,47 +26,44 @@
             <center>
 
                 <div class="col-sm-4">
-                    <form action="/actualizarDepartamento/{{perce.0}}" method="post">
+                    <form action="/actualizarDepartamento/{{depa.0}}" method="post">
 
                         <table>
-                            <tr>
+                            <!--tr>
                                 <td>
                                     <label>ID:</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="number" required name="id" value="{{perce.0}}">
+                                    <input type="number" required name="id" value="{{depa.0}}">
                                 </td>
-                            </tr>
+                            </tr-->
                             <tr>
                                 <td>
                                     <label>NOMBRE:</label>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <input type="text" required name="nombre" placeholder="Ingresa el nombre."
-                                        value="{{perce.1}}">
+                                    <input type="text" required name="nombreD" placeholder="Ingresa el nombre."
+                                        value="{{depa.0}}">
                                 </td>
                             </tr>
-
+                        </table>
                         <br> <br><br>
                         <div class="form-group">
                             <input type="submit" value="Guardar" class="btn btn-primary">
 
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <a href="/CancelarDep" class="btn btn-danger">Cancelar</a>
+                            <a href="/Departamentos" class="btn btn-danger">Cancelar</a>
                         </div>
+
                     </form>
                 </div>
             </center>
         </div>
+    </main>
 </body>
 
-<footer style="margin-bottom: 0">
-    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-    <address style="text-align: center;"> Departamento RH </address>
-</footer>
+  {% include 'Comunes/footer.html' %}
 
 </html>
