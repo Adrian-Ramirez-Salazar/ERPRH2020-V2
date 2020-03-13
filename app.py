@@ -42,7 +42,7 @@ def login():
         cnxn.close()
     except:
         flash('Datos incorrectos')
-    return render_template('Comunes/principal.html', user=name.format(username))
+    return render_template('Comunes/principal.html')
 
 
 
