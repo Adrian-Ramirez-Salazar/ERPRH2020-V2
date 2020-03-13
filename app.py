@@ -2,6 +2,7 @@ import pypyodbc
 from flask import Flask, render_template, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import pyodbc
+from sqlalchemy.sql.functions import session_user
 from werkzeug.utils import redirect
 from Datos.DeduccionesDAO import DeduccionesDAO
 from Datos.usuarioDAO import UsuarioDAO
@@ -30,6 +31,7 @@ def login():
     try:
         server = 'localhost'
         database = 'ERP2020'
+        name = 'Juan'
         username = request.form['Usuario']
         password = request.form['Contraseña']
         session['usr'] = username
@@ -40,7 +42,7 @@ def login():
         cnxn.close()
     except:
         flash('Datos incorrectos')
-    return render_template('Comunes/principal.html')
+    return render_template('Comunes/principal.html', user=name.format(username))
 
 
 
@@ -585,7 +587,7 @@ def insertarEmpleado():
     estadoCivil = request.form['estadoCivil']
     diasVaca = request.form['diasVacaciones']
     diasPermiso = request.form['diasPermiso']
-    foto = request.form['fotografia']
+    foto = request.files['fotografia'].stream.read()
     direccion = request.form['direccion']
     colonia = request.form['colonia']
     codigoPostal = request.form['codigoPostal']
