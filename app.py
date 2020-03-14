@@ -115,7 +115,10 @@ def Horarios():
 
 @app.route('/Empleados')
 def Empleados():
-    return render_template('Empleados/ConsultaGeneralEmpleados.html')
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.Empleados;')
+    data = cursor.fetchall()
+    return render_template('Empleados/ConsultaGeneralEmpleados.html', empleados=data)
 
 
 
@@ -595,14 +598,16 @@ def insertarEmpleado():
     comision = request.form['porcentajeComision']
     idDepa = request.form['idDepa']
     idPuesto = request.form['idPuesto']
-    idCiudad = request.form['idCiudad']
+    idCiudad = request.form['city']
     cursor = conn.cursor()
     cursor.execute(
         'INSERT INTO RH.Empleados (nombre,apaterno,amaterno,sexo,fechaContratacion,fechaNacimiento,salario,nss,estadoCivil,diasVacaciones,diasPermiso,'
-        'fotografia,direccion,colonia,codigoPostal,escolaridad,porcentajeComision,idDepartamento,idPuesto,idCiudad) VALUES '
-        '(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(nombre,apaterno,amaterno,sexo,feContratacion,feNacimiento,salario,seguroSocial,
+        'fotografia,direccion,colonia,codigoPostal,escolaridad,porcentajeComision,idDepartamento,idPuesto,idCiudad) '
+        'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(nombre,apaterno,amaterno,sexo,feContratacion,feNacimiento,salario,seguroSocial,
                                                      estadoCivil,diasVaca,diasPermiso,foto,direccion,colonia,codigoPostal,escolaridad,
-                                                     comision,idDepa,idPuesto,idCiudad))
+                                                     comision,idDepa,
+                                                     idPuesto,
+                                                     idCiudad))
     conn.commit()
     return render_template('Empleados/ConsultaGeneralEmpleados.html')
 

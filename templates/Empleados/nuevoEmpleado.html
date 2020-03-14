@@ -72,8 +72,8 @@
                                     <label>SEXO: </label>
                                 </td>
                                 <td>
-                                    <input type="radio" name="sexo" value="F" checked>Femenino
-                                    <input type="radio" name="sexo" value="M">Masculino
+                                    <input type="radio" name="sexo" value="F" checked>F
+                                    <input type="radio" name="sexo" value="M">M
 
                                 </td>
                             </tr>
@@ -106,7 +106,7 @@
                                     <label>NUMERO SEGURO SOCIAL: </label>
                                 </td>
                                 <td>
-                                    <input class="campos" type="text" required name="nss">
+                                    <input class="campos" type="text" required name="nss" maxlength="11">
                                 </td>
                             </tr>
                             <tr>
@@ -114,7 +114,17 @@
                                     <label>Estado Civil: </label>
                                 </td>
                                 <td>
-                                    <input class="campos" type="text" required name="estadoCivil">
+                                    <select name="estadoCivil" class="form-control">
+                                    <option value="">--Elige un Estado Civil--</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Comprometido/a">Comprometido/a</option>
+                                    <option value="En Relación">En Relación</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                    <option value="Unión libre">Unión libre</option>
+                                    <option value="Separado/a">Separado/a</option>
+                                    <option value="Divorciado/a">Divorciado/a</option>
+                                    <option value="Viudo/a">Viudo/a</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
@@ -169,7 +179,18 @@
                                     <label>ESCOLARIDAD: </label>
                                 </td>
                                 <td>
-                                    <input class="campos" type="text" required name="escolaridad">
+                                    <select name="escolaridad" class="form-control">
+                                    <option value="" >--Elige la Escolaridad--</option>
+                                    <option value="Educación preescolar">Educación preescolar</option>
+                                    <option value="Educación Primaria">Educación Primaria</option>
+                                    <option value="Educación secundaria">Educación secundaria</option>
+                                    <option value="Educación media superior">Educación media superior</option>
+                                    <option value="Educación superior">Educación superior</option>
+                                    <option value="Mestria">Mestria</option>
+                                    <option value="Especialidad">Especialidad</option>
+                                    <option value="Doctorado">Doctorado</option>
+                                    <option value="PostDoctorado">PostDoctorado</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
@@ -198,7 +219,8 @@
                                     <label>ID CIUDAD: </label>
                                 </td>
                                 <td>
-                                    <input class="campos" type="number" required name="idCiudad">
+                                    <input class="campos" type="number" required name="city">
+                                </td>
                             </tr>
                         </table>
                         <br>
