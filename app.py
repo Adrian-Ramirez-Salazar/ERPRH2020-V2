@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key=b'yangars'
 
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=ADILENE\SQLEXPRESS;'
+                      'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 cursor = conn.cursor()
@@ -31,7 +31,6 @@ def login():
     try:
         server = 'localhost'
         database = 'ERP2020'
-        name = 'Juan'
         username = request.form['Usuario']
         password = request.form['Contraseña']
         session['usr'] = username
@@ -109,7 +108,10 @@ def Puestos():
 
 @app.route('/Horarios')
 def Horarios():
-    return render_template('Horarios/ConsultaGeneralHorarios.html')
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.Horarios;')
+    data = cursor.fetchall()
+    return render_template('Horarios/ConsultaGeneralHorarios.html', horarios=data)
 
 
 
@@ -553,7 +555,7 @@ def insertarHorario():
         conn.commit()
     except:
         return ('NO EXISTE RELACION CON ALGUN EMPLEADO')
-    return render_template('Horarios/ConsultaGeneralHorarios.html')
+    return redirect('/Horarios')
 
 
 
@@ -601,15 +603,15 @@ def insertarEmpleado():
     idCiudad = request.form['city']
     cursor = conn.cursor()
     cursor.execute(
-        'INSERT INTO RH.Empleados (nombre,apaterno,amaterno,sexo,fechaContratacion,fechaNacimiento,salario,nss,estadoCivil,diasVacaciones,diasPermiso,'
+        'Insert into RH.Empleados (nombre,apaterno,amaterno,sexo,fechaContratacion,fechaNacimiento,salario,nss,estadoCivil,diasVacaciones,diasPermiso,'
         'fotografia,direccion,colonia,codigoPostal,escolaridad,porcentajeComision,idDepartamento,idPuesto,idCiudad) '
-        'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(nombre,apaterno,amaterno,sexo,feContratacion,feNacimiento,salario,seguroSocial,
+        'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);', (nombre,apaterno,amaterno,sexo,feContratacion,feNacimiento,salario,seguroSocial,
                                                      estadoCivil,diasVaca,diasPermiso,foto,direccion,colonia,codigoPostal,escolaridad,
                                                      comision,idDepa,
                                                      idPuesto,
                                                      idCiudad))
     conn.commit()
-    return render_template('Empleados/ConsultaGeneralEmpleados.html')
+    return redirect('/Empleados')
 
 
 
