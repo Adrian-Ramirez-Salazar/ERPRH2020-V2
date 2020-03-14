@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key=b'yangars'
 
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
+                      'Server=ADILENE\SQLEXPRESS;'
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 cursor = conn.cursor()
