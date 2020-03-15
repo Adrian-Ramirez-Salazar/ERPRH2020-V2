@@ -157,19 +157,19 @@
 					{% endfor %}
 			</table>
 
-			<ul class="pager">
-				{% if data <=1 %}
+			<!--ul class="pager">
+				{% if pagina <=1 %}
 					<li class="disabled"><a href="#">Anterior</a></li>
 				{% else %}
 					<li><a href="/Horarios/{{pagina-1}}">Anterior</a></li>
 				{% endif %}
-				<li>Pagina<b>{{data}}</b> de <b>{{paginas}}</b></li>
-				{% if data >= paginas %}
+				<li>Pagina<b>{{pagina}}</b> de <b>{{paginas}}</b></li>
+				{% if pagina >= paginas %}
 					<li class="disabled"><a href="#">Siguiente</a></li>
 				{% else %}
 					<li><a href="/Horarios/{{pagina+1}}">Siguiente</a></li>
 				{% endif %}
-			</ul>
+			</ul-->
 
 				<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
