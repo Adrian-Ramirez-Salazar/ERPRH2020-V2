@@ -13,3 +13,15 @@ class Conexion:
 
     def cerrar(self):
         self.db.close()
+
+
+    def consultarFoto(self, id):
+        sql = "Select fotografia from RH.Empleados where idEmpleado=?"
+        db=self.getDB()
+        if(db!='false'):
+            cursor=db.cursor()
+            cursor.execute(sql,(id,))
+            rs=cursor.fetchone()
+            cursor.close()
+            db.close()
+            return rs[0]

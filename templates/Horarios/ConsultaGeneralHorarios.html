@@ -127,10 +127,9 @@
 
 			<form action="/seleccionHorario" method="post">
 				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
-				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
+				<input id="codigo" type="number" required min="1" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
-			<a class="lista" href="/listarHorarios" style="text-decoration: none;"></a>
 			<table id="datos" class="table">
 				<thead>
 					<tr>

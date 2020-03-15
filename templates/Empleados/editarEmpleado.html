@@ -13,24 +13,11 @@
 
 <header id="MENU">
     <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
-    <ul>
-        <li><a href="/Deducciones">Deducciones</a>
-
-        </li>
-
-        <li><a href="/Percepciones">Percepciones</a>
-
-        </li>
-
-        <li><a href="/Ciudades">Ciudades</a>
-
-        </li>
-
-        <li><a href="/Estado">Estado</a>
-
-        </li>
-
-    </ul>
+ <style>
+        .campos {
+            padding-right:  200px;
+        }
+    </style>
 
 </header>
 
@@ -41,38 +28,186 @@
             <h1> Editar Empleado </h1><br>
             <center>
                 <div class="col-sm-4">
-                    <form action="/actualizarCiudad/{{ciuda.0}}" method="post">
+                    <form action="/actualizarEmpleado/{{emple.0}}" method="post" enctype="multipart/form-data">
 
                         <table>
-
-                            <!--tr>
-                                <td>
-                                    <label>ID:</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" required name="id" value="{{ciuda.0}}">
-                                </td>
-                            </tr-->
                             <tr>
                                 <td>
                                     <label>NOMBRE:</label>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <input type="text" placeholder="" required name="nombre" value="Empleado a editar">
+                                    <input class="campos" type="text" placeholder="" required name="nombre" value="{{emple.1}}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>ID_ESTADO:</label>
+                                    <label>APELLIDO PATERNO:</label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="text" required name="apaterno" value="{{emple.2}}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="number"  required name="idEstado" value="1" >
+                                    <label>APELLIDO MATERNO:</label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="text" required name="amaterno" value="{{emple.3}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>SEXO: </label>
+                                </td>
+                                <td>
+                                    <input type="radio" name="sexo" value="F" checked value="{{emple.4}}">F
+                                    <input type="radio" name="sexo" value="M" value="{{emple.4}}">M
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>FECHA CONTRATACION: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="date" required name="fechaContratacion" value="{{emple.5}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>FECHA NACIMIENTO: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="date" required name="fechaNacimiento" value="{{emple.6}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>SALARIO: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="salario" value="{{emple.7}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>NUMERO SEGURO SOCIAL: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="text" min="1" required name="nss" maxlength="11" value="{{emple.8}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Estado Civil: </label>
+                                </td>
+                                <td>
+                                    <select name="estadoCivil" class="form-control" value="{{emple.9}}">
+                                    <option value="" >--Elige un Estado Civil--</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Comprometido/a">Comprometido/a</option>
+                                    <option value="En Relación">En Relación</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                    <option value="Unión libre">Unión libre</option>
+                                    <option value="Separado/a">Separado/a</option>
+                                    <option value="Divorciado/a">Divorciado/a</option>
+                                    <option value="Viudo/a">Viudo/a</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>DIAS VACACIONES: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="diasVacaciones" value="{{emple.10}}">
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>DIAS PERMISO: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="diasPermiso" value="{{emple.11}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>FOTOGRAFIA: </label>
+                                </td>
+                                <td>
+                                    <img name="foto" src="{{emple.12}}"><input type="file" name="foto">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>DIRECCION: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="text" required name="direccion" value="{{emple.13}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>COLONIA: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="text" required name="colonia" value="{{emple.14}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>CODIGO POSTAL: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="codigoPostal" value="{{emple.15}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>ESCOLARIDAD: </label>
+                                </td>
+                                <td>
+                                    <select name="escolaridad" class="form-control" value="{{emple.16}}">
+                                    <option value="" >--Elige la Escolaridad--</option>
+                                    <option value="Educación preescolar">Educación preescolar</option>
+                                    <option value="Educación Primaria">Educación Primaria</option>
+                                    <option value="Educación secundaria">Educación secundaria</option>
+                                    <option value="Educación media superior">Educación media superior</option>
+                                    <option value="Educación superior">Educación superior</option>
+                                    <option value="Mestria">Mestria</option>
+                                    <option value="Especialidad">Especialidad</option>
+                                    <option value="Doctorado">Doctorado</option>
+                                    <option value="PostDoctorado">PostDoctorado</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>COMISION: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="porcentajeComision" value="{{emple.17}}">
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>ID DEPARTAMENTO: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="idDepa" value="{{emple.18}}">
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>ID PUESTO: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="idPuesto" value="{{emple.19}}">
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>ID CIUDAD: </label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="city" value="{{emple.20}}">
                                 </td>
                             </tr>
                         </table>
@@ -82,17 +217,14 @@
                         <div class="form-group">
                             <input type="submit" value="Guardar" class="btn btn-primary">
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <a href="/CancelarC" class="btn btn-danger">Cancelar</a>
+                            <a href="/Empleados" class="btn btn-danger">Cancelar</a>
                         </div>
                     </form>
                 </div>
             </center>
         </div>
+    </main>
 </body>
-
-<footer style="margin-bottom: 0">
-    <img src="../../static/imagenes/fondo4.png" width="60px" height="60px">
-    <address style="text-align: center;"> Departamento RH </address>
-</footer>
+  {% include 'Comunes/footer.html' %}
 
 </html>

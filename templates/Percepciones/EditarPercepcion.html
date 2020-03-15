@@ -28,21 +28,21 @@
                     <form action="/actualizarPercepcion/{{perce.0}}" method="post">
 
                         <table>
-                            <tr>
+                            <!--tr>
                                 <td>
                                     <label>ID:</label>
                                 </td>
                                 <td>
                                     <input type="number" required name="id" value="{{perce.0}}">
                                 </td>
-                            </tr>
+                            </tr-->
                             <tr>
                                 <td>
                                     <label>NOMBRE:</label>
                                 </td>
                                 <td>
                                     <input type="text" required name="nombre" placeholder="Ingresa el nombre."
-                                        value="{{perce.1}}">
+                                        value="{{perce.0}}">
                                 </td>
                             </tr>
                             <tr>
@@ -51,7 +51,7 @@
                                 </td>
                                 <td>
                                     <input type="text" required name="descripcion" placeholder="Ingresa la descripcion."
-                                        value="{{perce.2}}">
+                                        value="{{perce.1}}">
                                 </td>
                             </tr>
                             <tr>
@@ -60,7 +60,7 @@
                                 </td>
                                 <td>
                                     <input type="number" required min="1"  name="diaspagar" placeholder="Ingresa los dias."
-                                        value="{{perce.3}}">
+                                        value="{{perce.2}}">
                                 </td>
                             </tr>
                         </table>

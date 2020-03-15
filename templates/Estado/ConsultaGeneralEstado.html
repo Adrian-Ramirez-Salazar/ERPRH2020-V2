@@ -131,7 +131,7 @@
 			<br>
 
 
-			<table id="datos" class="table">
+			<table id="datos" class="table" >
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -156,6 +156,20 @@
 					</tr>
 					{% endfor %}
 			</table>
+
+			<ul class="pager">
+				{% if data <=1 %}
+					<li class="disabled"><a href="#">Anterior</a></li>
+				{% else %}
+					<li><a href="/Horarios/{{pagina-1}}">Anterior</a></li>
+				{% endif %}
+				<li>Pagina<b>{{data}}</b> de <b>{{paginas}}</b></li>
+				{% if data >= paginas %}
+					<li class="disabled"><a href="#">Siguiente</a></li>
+				{% else %}
+					<li><a href="/Horarios/{{pagina+1}}">Siguiente</a></li>
+				{% endif %}
+			</ul>
 
 				<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>

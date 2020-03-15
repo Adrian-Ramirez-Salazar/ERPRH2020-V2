@@ -35,14 +35,6 @@
                     <form action="/insertarEmpleado" method="post" enctype="multipart/form-data">
 
                         <table>
-                            <!--tr>
-                                <td>
-                                    <label>ID_EMPLEADO:</label>
-                                </td>
-                                <td>
-                                    <input type="number" required name="idempleado">
-                                </td>
-                            </tr-->
                             <tr>
                                 <td>
                                     <label>NOMBRE:</label>
@@ -106,7 +98,7 @@
                                     <label>NUMERO SEGURO SOCIAL: </label>
                                 </td>
                                 <td>
-                                    <input class="campos" type="text" required name="nss" maxlength="11">
+                                    <input class="campos" type="text" min="1" required name="nss" maxlength="11">
                                 </td>
                             </tr>
                             <tr>

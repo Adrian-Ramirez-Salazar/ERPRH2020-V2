@@ -6,6 +6,7 @@ from sqlalchemy.sql.functions import session_user
 from werkzeug.utils import redirect
 from Datos.DeduccionesDAO import DeduccionesDAO
 from Datos.usuarioDAO import UsuarioDAO
+from Datos.Conexion import Conexion
 
 app = Flask(__name__)
 app.secret_key=b'yangars'
@@ -109,7 +110,7 @@ def Puestos():
 @app.route('/Horarios')
 def Horarios():
     cursor = conn.cursor()
-    cursor.execute('Select *from RH.Horarios;')
+    cursor.execute('Select h.idHorario,h.horaInicio,h.horaFin, h.dias, e.nombre+' '+e.apaterno+' '+e.amaterno from RH.Horarios h join  RH.Empleados e on e.idEmpleado=h.idEmpleado;')
     data = cursor.fetchall()
     return render_template('Horarios/ConsultaGeneralHorarios.html', horarios=data)
 
@@ -130,6 +131,7 @@ def Departamentos():
     cursor.execute('SELECT *FROM RH.Departamentos;')
     data = cursor.fetchall()
     return render_template('Departamentos/ConsultaGeneralDepartamentos.html', departamentos=data)
+
 
 
 
@@ -199,15 +201,17 @@ def editarDeduccion(id):
 #Actualizar el registro editado
 @app.route('/actualizarDeduccion/<id>', methods=['POST'])
 def actualizarDeduccion(id):
-    idD=request.form['id']
+   # idD=request.form['id']
     nombre=request.form['nombre']
     descripcion=request.form['descripcion']
     porcentaje=request.form['porcentaje']
     cursor = conn.cursor()
-    cursor.execute('Update RH.Deducciones set idDeduccion=?, nombre=?, descripcion=?, porcentaje=? where idDeduccion=?;'
-                   ,(idD, nombre,descripcion,porcentaje,id))
+    cursor.execute('Update RH.Deducciones set nombre=?, descripcion=?, porcentaje=? where idDeduccion=?;'
+                   ,(nombre,descripcion,porcentaje,id))
     conn.commit()
     return redirect('/Deducciones')
+
+
 
 
 
@@ -269,7 +273,7 @@ def eliminarPercepcion(id):
 def editarPercepcion(id):
     cursor = conn.cursor()
     cursor.execute(
-        'Select idPercepcion, nombre, descripcion, diasPagar from RH.Percepciones where idPercepcion={0}'.format(id))
+        'Select  nombre, descripcion, diasPagar from RH.Percepciones where idPercepcion={0}'.format(id))
     data = cursor.fetchall()
     return render_template('Percepciones/EditarPercepcion.html', perce=data[0])
 
@@ -279,16 +283,18 @@ def editarPercepcion(id):
     # Actualizar el registro editado
 @app.route('/actualizarPercepcion/<id>', methods=['POST'])
 def actualizarPercepcion(id):
-    idP = request.form['id']
+   # idP = request.form['id']
     nombre = request.form['nombre']
     descripcion = request.form['descripcion']
     diasP = request.form['diaspagar']
     cursor = conn.cursor()
     cursor.execute(
-        'Update RH.Percepciones set idPercepcion=?, nombre=?, descripcion=?, diasPagar=? where idPercepcion=?;'
-        , (idP, nombre, descripcion, diasP, id))
+        'Update RH.Percepciones set nombre=?, descripcion=?, diasPagar=? where nombre=?;'
+        , (nombre, descripcion, diasP, id))
     conn.commit()
     return redirect('/Percepciones')
+
+
 
 
 
@@ -377,7 +383,9 @@ def actualizarCiudad(id):
 
 
 
-                                              # Diferentes consultas para los ESTADOS:
+
+
+                                                         # Diferentes consultas para los ESTADOS:
 @app.route('/nuevoEstado')
 def nuevoEstado():
     return render_template('Estado/NuevoEstado.html')
@@ -446,6 +454,8 @@ def actualizarEstado(id):
          , (nombre,siglas, id))
     conn.commit()
     return redirect('/Estado')
+
+
 
 
 
@@ -528,6 +538,8 @@ def actualizarPuesto(id):
 
 
 
+
+
                                                         #DIFERENTES CONSULTAS PARA LOS HORARIOS
 
 #nuevo horario
@@ -535,10 +547,6 @@ def actualizarPuesto(id):
 def nuevoHorario():
     return render_template('Horarios/NuevoHorario.html')
 
-#cancelar Horarios
-@app.route('/CancelarHor')
-def cancelarHorario():
-    return render_template('Horarios/ConsultaGeneralHorarios.html')
 
 
 #Insertar un nuevo Horario
@@ -554,7 +562,58 @@ def insertarHorario():
             'INSERT INTO RH.Horarios (horaInicio, horaFin, dias,idEmpleado) VALUES (?,?,?,?)',(horaInicio,horaFin,dias,idE))
         conn.commit()
     except:
-        return ('NO EXISTE RELACION CON ALGUN EMPLEADO')
+        return ('NO EXISTE RELACION CON ALGUN EMPLEADO: ID INCORRECTO')
+    return redirect('/Horarios')
+
+
+
+
+
+# Lista Individual de Horarios
+@app.route('/seleccionHorario', methods=['POST'])
+def seleccionHorarios():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute(
+       'Select *from RH.Horarios where idHorario={0}'.format(codigo))
+    data = cursor.fetchall()
+    return render_template('Horarios/ConsultaGeneralHorarios.html', horarios=data)
+
+
+
+
+# Eliminar algun registro de los Horarios
+@app.route('/EliminarHorario/<string:id>')
+def eliminarHorario(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.Horarios where idHorario={0}'.format(id))
+    conn.commit()
+    return redirect('/Horarios')
+
+
+
+
+# Editar Horario
+@app.route('/EditarHorario/<id>')
+def editarHorario(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select * from RH.Horarios where idHorario={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('Horarios/EditarHorario.html', hor=data[0])
+
+
+
+# Actualizar el registro editado
+@app.route('/actualizarhorario/<id>', methods=['POST'])
+def actualizarHorario(id):
+    horaInicio = request.form['horaInicio']
+    horaFin = request.form['horaFin']
+    dias = request.form['Dias']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.Horarios set horaInicio=?, horaFin=?, dias=? where idHorario=?;', (horaInicio,horaFin,dias, id))
+    conn.commit()
     return redirect('/Horarios')
 
 
@@ -565,17 +624,12 @@ def insertarHorario():
 
 
 
-                                                            #DIFERENTES CONSULTAS PARA LOS EMPLEADOS
+                                                                #DIFERENTES CONSULTAS PARA LOS EMPLEADOS
 
 #nuevo Empleado
 @app.route('/nuevoEmpleado')
 def nuevoEmpleado():
     return render_template('Empleados/nuevoEmpleado.html')
-
-#Cancelar nuevo empleado
-@app.route('/CancelarEmpleado')
-def cancelarEmpleado():
-    return render_template('Empleados/ConsultaGeneralEmpleados.html')
 
 
 #Insertar un nuevo empleado
@@ -592,7 +646,7 @@ def insertarEmpleado():
     estadoCivil = request.form['estadoCivil']
     diasVaca = request.form['diasVacaciones']
     diasPermiso = request.form['diasPermiso']
-    foto = request.files['fotografia'].stream.read()
+    foto = request.files['foto'].stream.read()
     direccion = request.form['direccion']
     colonia = request.form['colonia']
     codigoPostal = request.form['codigoPostal']
@@ -616,13 +670,94 @@ def insertarEmpleado():
 
 
 
+# Lista Individual de Empleados
+@app.route('/seleccionEmpleados', methods=['POST'])
+def seleccionEmpleados():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select idEmpleado, nombre, apaterno, amaterno, sexo, fechaContratacion,'
+                   ' fechaNacimiento, salario,nss, estadoCivil, diasVacaciones, diasPermiso, fotografia, direccion, colonia,'
+                    'codigoPostal, escolaridad, porcentajeComision from RH.Empleados where idEmpleado={0}'.format(codigo))
+    data = cursor.fetchall()
+    return render_template('Empleados/ConsultaGeneralEmpleados.html', empleados=data)
+
+
+
+
+# Eliminar algun registro de los Empleados
+@app.route('/eliminarEmpleado/<string:id>')
+def eliminarEmpleado(id):
+    try:
+        cursor = conn.cursor()
+        cursor.execute('Delete from RH.Empleados where idEmpleado={0}'.format(id))
+        conn.commit()
+    except:
+        return 'No se puede eliminar el EMPLEADO ya que esta asignado a un HORARIO: Elimine el Horario asignado primero'
+    return redirect('/Empleados')
+
+
+
+
+# Editar Empleado
+@app.route('/editarEmpleado/<id>')
+def editarEmpleado(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.Empleados where idEmpleado={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('Empleados/editarEmpleado.html', emple=data[0])
+
+
+
+@app.route("/consultaImagen/<id>")
+def consultaImagen(id):
+    img = Conexion.consultarFoto(id)
+    return img
+
+
+    # Actualizar el registro editado
+@app.route('/actualizarEmpleado/<id>', methods=['POST'])
+def actualizarEmpleado(id):
+    nombre = request.form['nombre']
+    apaterno = request.form['apaterno']
+    amaterno = request.form['amaterno']
+    sexo = request.form['sexo']
+    fechaContratacion = request.form['fechaContratacion']
+    fechaNacimiento = request.form['fechaNacimiento']
+    salario = request.form['salario']
+    nss = request.form['nss']
+    estadoCivil = request.form['estadoCivil']
+    diasVacaciones = request.form['diasVacaciones']
+    diasPermiso = request.form['diasPermiso']
+    fotografia = request.files['foto'].stream.read()
+    direccion = request.form['direccion']
+    colonia = request.form['colonia']
+    codigoPostal = request.form['codigoPostal']
+    escolaridad = request.form['escolaridad']
+    porcentajeComision = request.form['porcentajeComision']
+    idDepa = request.form['idDepa']
+    idPuesto = request.form['idPuesto']
+    city = request.form['city']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.Empleados set nombre=?, apaterno=?, amaterno=?, sexo=?, fechaContratacion=?, fechaNacimiento=?, salario=?,'
+        'nss=?, estadoCivil=?, diasVacaciones=?, diasPermiso=?, fotografia=?, direccion=?, colonia=?, codigoPostal=?, escolaridad=?,'
+        'porcentajeComision=?, idDepartamento=?, idPuesto=?, idCiudad=?  where idEmpleado=?;', (nombre,apaterno,amaterno,sexo,fechaContratacion,
+                                                                                                fechaNacimiento,salario,nss,estadoCivil,
+                                                                                                diasVacaciones,diasPermiso,fotografia,
+                                                                                                direccion,colonia,codigoPostal,escolaridad,
+                                                                                                porcentajeComision,idDepa,idPuesto,city,id))
+    conn.commit()
+    return redirect('/Empleados')
 
 
 
 
 
 
-                                                        #DIFERENTES CONSULTAS PARA LOS DEPARTAMENTOS
+
+
+                                                         #DIFERENTES CONSULTAS PARA LOS DEPARTAMENTOS
 
 #nuevo Departamento
 @app.route('/nuevoDepartamento')
