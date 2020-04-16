@@ -1,14 +1,21 @@
-import pypyodbc
+#import pypyodbc
 from flask import Flask, render_template, request, session, flash
-from flask_sqlalchemy import SQLAlchemy
+from flask_paginate import Pagination, get_page_args
+#from flask_sqlalchemy import SQLAlchemy
 import pyodbc
-from sqlalchemy.sql.functions import session_user
+#from sqlalchemy.sql.functions import session_user
 from werkzeug.utils import redirect
-from Datos.DeduccionesDAO import DeduccionesDAO
-from Datos.usuarioDAO import UsuarioDAO
+#from Datos.DeduccionesDAO import DeduccionesDAO
+#from Datos.usuarioDAO import UsuarioDAO
 from Datos.Conexion import Conexion
 
 app = Flask(__name__)
+
+users = list(range(50))
+
+def get_users(offset=0, per_page=10):
+    return users[offset: offset + per_page]
+
 app.secret_key=b'yangars'
 
 conn = pyodbc.connect('Driver={SQL Server};'
@@ -16,6 +23,7 @@ conn = pyodbc.connect('Driver={SQL Server};'
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 cursor = conn.cursor()
+
 
 
 #Nos direcciona a la pagina para logearse
@@ -83,7 +91,7 @@ def Percepcciones():
 @app.route('/Ciudades')
 def Ciudades():
     cursor = conn.cursor()
-    cursor.execute('SELECT *FROM RH.Ciudades;')
+    cursor.execute('Select c.idCiudad,c.nombre, e.nombre from RH.Ciudades c join RH.Estado e on c.Estado_idEstado=E.idEstado;')
     data = cursor.fetchall()
     return render_template('Ciudades/ConsultaGeneralCiudad.html', ciudades=data)
 
@@ -92,9 +100,22 @@ def Ciudades():
 @app.route('/Estado')
 def Estado():
     cursor = conn.cursor()
-    cursor.execute('SELECT *FROM RH.Estado;')
+    cursor.execute('SELECT idEstado, nombre, siglas from  RH.Estado;')
     data = cursor.fetchall()
-    return render_template('Estado/ConsultaGeneralEstado.html', estados=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Estado/ConsultaGeneralEstado.html',
+                           estados= reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -635,36 +656,39 @@ def nuevoEmpleado():
 #Insertar un nuevo empleado
 @app.route('/insertarEmpleado', methods=['POST'])
 def insertarEmpleado():
-    nombre = request.form['nombre']
-    apaterno = request.form['apaterno']
-    amaterno = request.form['amaterno']
-    sexo = request.form['sexo']
-    feContratacion = request.form['fechaContratacion']
-    feNacimiento = request.form['fechaNacimiento']
-    salario = request.form['salario']
-    seguroSocial = request.form['nss']
-    estadoCivil = request.form['estadoCivil']
-    diasVaca = request.form['diasVacaciones']
-    diasPermiso = request.form['diasPermiso']
-    foto = request.files['foto'].stream.read()
-    direccion = request.form['direccion']
-    colonia = request.form['colonia']
-    codigoPostal = request.form['codigoPostal']
-    escolaridad = request.form['escolaridad']
-    comision = request.form['porcentajeComision']
-    idDepa = request.form['idDepa']
-    idPuesto = request.form['idPuesto']
-    idCiudad = request.form['city']
-    cursor = conn.cursor()
-    cursor.execute(
-        'Insert into RH.Empleados (nombre,apaterno,amaterno,sexo,fechaContratacion,fechaNacimiento,salario,nss,estadoCivil,diasVacaciones,diasPermiso,'
-        'fotografia,direccion,colonia,codigoPostal,escolaridad,porcentajeComision,idDepartamento,idPuesto,idCiudad) '
-        'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);', (nombre,apaterno,amaterno,sexo,feContratacion,feNacimiento,salario,seguroSocial,
+    try:
+        nombre = request.form['nombre']
+        apaterno = request.form['apaterno']
+        amaterno = request.form['amaterno']
+        sexo = request.form['sexo']
+        feContratacion = request.form['fechaContratacion']
+        feNacimiento = request.form['fechaNacimiento']
+        salario = request.form['salario']
+        seguroSocial = request.form['nss']
+        estadoCivil = request.form['estadoCivil']
+        diasVaca = request.form['diasVacaciones']
+        diasPermiso = request.form['diasPermiso']
+        foto = request.files['foto'].stream.read()
+        direccion = request.form['direccion']
+        colonia = request.form['colonia']
+        codigoPostal = request.form['codigoPostal']
+        escolaridad = request.form['escolaridad']
+        comision = request.form['porcentajeComision']
+        idDepa = request.form['idDepa']
+        idPuesto = request.form['idPuesto']
+        idCiudad = request.form['city']
+        cursor = conn.cursor()
+        cursor.execute(
+            'Insert into RH.Empleados (nombre,apaterno,amaterno,sexo,fechaContratacion,fechaNacimiento,salario,nss,estadoCivil,diasVacaciones,diasPermiso,'
+            'fotografia,direccion,colonia,codigoPostal,escolaridad,porcentajeComision,idDepartamento,idPuesto,idCiudad) '
+            'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);', (nombre,apaterno,amaterno,sexo,feContratacion,feNacimiento,salario,seguroSocial,
                                                      estadoCivil,diasVaca,diasPermiso,foto,direccion,colonia,codigoPostal,escolaridad,
                                                      comision,idDepa,
                                                      idPuesto,
                                                      idCiudad))
-    conn.commit()
+        conn.commit()
+    except:
+        return ('ALGUN CAMPO HACE REFERENCIA A UN REGISTRO INEXISTENTE.')
     return redirect('/Empleados')
 
 

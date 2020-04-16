@@ -2,17 +2,24 @@
 <html>
 
 <head>
-	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='../static/imagenes/rh.ico')}}">
 
 	<title> RH | Consulta Genera de Estado</title>
 	<meta charset="utf-8">
 
-	<meta name="viewport" content="width=device-width, scale = 1.0">
+	<meta name="viewport" content="width=device-width, scale = 1, shrink-to-fit=no">
 	<link rel="stylesheet" href="CSS/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="../../static/css/estilo.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="{{url_for('static', filename='../static/css/jquery.dataTables.min.css')}}">
+	<script src="{{url_for('static', filename='../static/js/jquery-3.4.1.min.js')}}"></script>
+	<script src="{{url_for('static', filename='../static/js/jquery.dataTables.min.js')}}"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
 </head>
 
 <header id="MENU">
@@ -36,7 +43,7 @@
 
 	<section>
 		<table>
-			<div class="carruselInicio" >
+			<div class="carruselInicio">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-left: 45px;">
 
 					<div class="carousel-inner">
@@ -121,8 +128,7 @@
 		<br> <br> <br>
 		<div class="container" style="text-align: center;">
 			<h1> CONSULTA DE ESTADOS </h1><bR>
-			<a href="/nuevoEstado" class="btn btn-primary"><img
-					src="../../static/imagenes/add.gif">Nuevo</a><br><br>
+			<a href="/nuevoEstado" class="btn btn-primary"><img src="../../static/imagenes/add.gif">Nuevo</a><br><br>
 
 			<form action="/seleccionEstado" method="post">
 				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
@@ -130,54 +136,43 @@
 			</form>
 			<br>
 
-
-			<table id="datos" class="table" >
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>NOMBRE</th>
-						<th>SIGLAS</th>
-						<th>EDITAR</th>
-						<th>ELIMINAR</th>
-					</tr>
+			{{pagination.info}}
+			<div class="table-responsive">
+				<table id="datos" class="table table-hover">
 					<thead>
-						<tbody>
-							{% for esta in estados %}
-					<tr>
-						<td>{{esta.0}}</td>
-						<td>{{esta.1}}</td>
-						<td>{{esta.2}}</td>
-						<td>
-							<a href="/editarEstado/{{esta.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
-						</td>
-						<td>
-							<a href="/eliminarEstado/{{esta.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
-						</td>
-					</tr>
-					{% endfor %}
-			</table>
-
-			<!--ul class="pager">
-				{% if pagina <=1 %}
-					<li class="disabled"><a href="#">Anterior</a></li>
-				{% else %}
-					<li><a href="/Horarios/{{pagina-1}}">Anterior</a></li>
-				{% endif %}
-				<li>Pagina<b>{{pagina}}</b> de <b>{{paginas}}</b></li>
-				{% if pagina >= paginas %}
-					<li class="disabled"><a href="#">Siguiente</a></li>
-				{% else %}
-					<li><a href="/Horarios/{{pagina+1}}">Siguiente</a></li>
-				{% endif %}
-			</ul-->
-
-				<br>
+						<tr>
+							<th>ID</th>
+							<th>NOMBRE</th>
+							<th>SIGLAS</th>
+							<th>EDITAR</th>
+							<th>ELIMINAR</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for esta in estados %}
+						<tr>
+							<td>{{ loop.index + (page - 1) * per_page}}</td>
+							<td>{{esta.1}}</td>
+							<td>{{esta.2}}</td>
+							<td>
+								<a href="/editarEstado/{{esta.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
+							</td>
+							<td>
+								<a href="/eliminarEstado/{{esta.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			{{pagination.links}}
+			<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>
 
 	</main><br>
 </body>
 
-  {% include 'Comunes/footer.html' %}
+{% include 'Comunes/footer.html' %}
 
 </html>
