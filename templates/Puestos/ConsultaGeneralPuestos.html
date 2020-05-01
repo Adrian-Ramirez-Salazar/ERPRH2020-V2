@@ -129,6 +129,7 @@
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
+{{pagination.info}}
 
 			<table id="datos" class="table">
 				<thead>
@@ -144,7 +145,7 @@
 						<tbody>
 							{% for pues in puestos %}
 					<tr>
-						<td>{{pues.0}}</td>
+						<td>{{pues.0 + (page - 1) * per_page}}</td>
 						<td>{{pues.1}}</td>
 						<td>{{pues.2}}</td>
 						<td>{{pues.3}}</td>
@@ -157,6 +158,8 @@
 					</tr>
 					{% endfor %}
 			</table>
+			{{pagination.links}}
+
 				<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>

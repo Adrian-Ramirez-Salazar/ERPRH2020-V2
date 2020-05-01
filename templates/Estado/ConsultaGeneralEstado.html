@@ -151,7 +151,7 @@
 					<tbody>
 						{% for esta in estados %}
 						<tr>
-							<td>{{ loop.index + (page - 1) * per_page}}</td>
+							<td>{{esta.0 + (page - 1) * per_page}}</td>
 							<td>{{esta.1}}</td>
 							<td>{{esta.2}}</td>
 							<td>

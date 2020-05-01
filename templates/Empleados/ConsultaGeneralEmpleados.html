@@ -136,6 +136,7 @@
 			</form>
 
 			<br>
+			{{pagination.info}}
 
 			<table id="datos" class="display">
 				<thead>
@@ -168,7 +169,7 @@
 				<tbody>
 					{% for emple in empleados %}
 					<tr>
-						<td>{{emple.0}}</td>
+						<td>{{emple.0 + (page - 1) * per_page}}</td>
 						<td>{{emple.1}}</td>
 						<td>{{emple.2}}</td>
 						<td>{{emple.3}}</td>
@@ -198,8 +199,9 @@
 					</tr>
 					{% endfor %}
 				</tbody>
-
 			</table>
+									{{pagination.links}}
+
 			<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>

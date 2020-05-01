@@ -131,7 +131,7 @@
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
-
+			{{pagination.info}}
 			<table id="datos" class="table">
 				<thead>
 					<tr>
@@ -146,7 +146,7 @@
 				<tbody>
 					{% for dedu in deducciones %}
 					<tr>
-						<td>{{dedu.0}}</td>
+						<td>{{dedu.0 + (page - 1) * per_page}}</td>
 						<td>{{dedu.1}}</td>
 						<td>{{dedu.2}}</td>
 						<td>{{dedu.3}}</td>
@@ -160,7 +160,7 @@
 					{% endfor %}
 				</tbody>
 			</table>
-
+			{{pagination.links}}
 			<br>
 
 			<a href="/Regresar" class="btn btn-danger" style="text-decoration: none;">Regresar</a>

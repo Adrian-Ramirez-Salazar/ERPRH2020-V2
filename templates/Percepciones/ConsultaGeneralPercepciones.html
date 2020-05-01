@@ -132,7 +132,7 @@
 			<br>
 
 
-
+{{pagination.info}}
 			<table id="datos" class="table">
 				<thead>
 					<tr>
@@ -147,7 +147,7 @@
 				<tbody>
 					{% for perc in percepciones %}
 					<tr>
-						<td>{{perc.0}}</td>
+						<td>{{perc.0 + (page - 1) * per_page}}</td>
 						<td>{{perc.1}}</td>
 						<td>{{perc.2}}</td>
 						<td>{{perc.3}}</td>
@@ -161,7 +161,7 @@
 					{% endfor %}
 				</tbody>
 			</table>
-
+{{pagination.links}}
 
 			<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>

@@ -131,7 +131,7 @@
 			</form>
 			<br>
 
-
+{{pagination.info}}
 			<table id="datos" class="table">
 				<thead>
 					<tr>
@@ -145,7 +145,7 @@
 				<tbody>
 					{% for ciud in ciudades %}
 					<tr>
-						<td> {{ciud.0}} </td>
+						<td> {{ciud.0 + (page - 1) * per_page}} </td>
 						<td> {{ciud.1}} </td>
 						<td> {{ciud.2}} </td>
 						<td>
@@ -157,7 +157,7 @@
 					</tr>
 					{% endfor %}
 			</table>
-
+{{pagination.links}}
 			<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>

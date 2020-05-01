@@ -130,6 +130,7 @@
 				<input id="codigo" type="number" required min="1" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
+			{{pagination.info}}
 			<table id="datos" class="table">
 				<thead>
 					<tr>
@@ -145,7 +146,7 @@
 						<tbody>
 							{% for hor in horarios %}
 					<tr>
-						<td>{{hor.0}}</td>
+						<td>{{hor.0 + (page - 1) * per_page}}</td>
 						<td>{{hor.1}}</td>
 						<td>{{hor.2}}</td>
 						<td>{{hor.3}}</td>
@@ -158,7 +159,10 @@
 						</td>
 					</tr>
 					{% endfor %}
-			</table><br>
+			</table>
+						{{pagination.links}}
+
+			<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>
 	</main>

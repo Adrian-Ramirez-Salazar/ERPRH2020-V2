@@ -75,7 +75,20 @@ def Deducciones():
     cursor = conn.cursor()
     cursor.execute('SELECT *FROM RH.Deducciones;')
     data = cursor.fetchall()
-    return render_template('Deducciones/Deducciones.html', deducciones=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Deducciones/Deducciones.html',
+                           deducciones=reg,
+                           page = page,
+                           per_page = per_page,
+                           pagination = pagination)
 
 
 
@@ -84,7 +97,21 @@ def Percepcciones():
     cursor = conn.cursor()
     cursor.execute('SELECT *FROM RH.Percepciones;')
     data = cursor.fetchall()
-    return render_template('Percepciones/ConsultaGeneralPercepciones.html', percepciones=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Percepciones/ConsultaGeneralPercepciones.html',
+                           percepciones=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination
+                           )
 
 
 
@@ -93,7 +120,20 @@ def Ciudades():
     cursor = conn.cursor()
     cursor.execute('Select c.idCiudad,c.nombre, e.nombre from RH.Ciudades c join RH.Estado e on c.Estado_idEstado=E.idEstado;')
     data = cursor.fetchall()
-    return render_template('Ciudades/ConsultaGeneralCiudad.html', ciudades=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Ciudades/ConsultaGeneralCiudad.html',
+                           ciudades=reg,
+                           page = page,
+                           per_page = per_page,
+                           pagination = pagination)
 
 
 
@@ -124,7 +164,20 @@ def Puestos():
     cursor = conn.cursor()
     cursor.execute('SELECT *FROM RH.Puestos;')
     data = cursor.fetchall()
-    return render_template('Puestos/ConsultaGeneralPuestos.html', puestos=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Puestos/ConsultaGeneralPuestos.html',
+                           puestos=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -133,7 +186,20 @@ def Horarios():
     cursor = conn.cursor()
     cursor.execute('Select h.idHorario,h.horaInicio,h.horaFin, h.dias, e.nombre+' '+e.apaterno+' '+e.amaterno from RH.Horarios h join  RH.Empleados e on e.idEmpleado=h.idEmpleado;')
     data = cursor.fetchall()
-    return render_template('Horarios/ConsultaGeneralHorarios.html', horarios=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Horarios/ConsultaGeneralHorarios.html',
+                           horarios=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -142,7 +208,20 @@ def Empleados():
     cursor = conn.cursor()
     cursor.execute('Select *from RH.Empleados;')
     data = cursor.fetchall()
-    return render_template('Empleados/ConsultaGeneralEmpleados.html', empleados=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Empleados/ConsultaGeneralEmpleados.html',
+                           empleados=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -151,7 +230,20 @@ def Departamentos():
     cursor = conn.cursor()
     cursor.execute('SELECT *FROM RH.Departamentos;')
     data = cursor.fetchall()
-    return render_template('Departamentos/ConsultaGeneralDepartamentos.html', departamentos=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('Departamentos/ConsultaGeneralDepartamentos.html',
+                           departamentos=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -192,7 +284,22 @@ def seleccionDeducciones():
     cursor = conn.cursor()
     cursor.execute('Select idDeduccion, nombre, descripcion, porcentaje from RH.Deducciones where idDeduccion={0}'.format(codigo))
     data = cursor.fetchall()
-    return render_template('Deducciones/Deducciones.html', deducciones=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Deducciones/Deducciones.html',
+                           deducciones=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -274,7 +381,22 @@ def seleccionPercepciones():
         'Select idPercepcion, nombre, descripcion, diasPagar from RH.Percepciones where idPercepcion={0}'.format(
             codigo))
     data = cursor.fetchall()
-    return render_template('Percepciones/ConsultaGeneralPercepciones.html', percepciones=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Percepciones/ConsultaGeneralPercepciones.html',
+                           percepciones=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -359,7 +481,22 @@ def seleccionCiudades():
         'Select idCiudad, nombre, Estado_idEstado from RH.Ciudades where idCiudad={0}'.format(
             codigo))
     data = cursor.fetchall()
-    return render_template('Ciudades/ConsultaGeneralCiudad.html', ciudades=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Ciudades/ConsultaGeneralCiudad.html',
+                           ciudades=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -432,12 +569,28 @@ def insertarEstado():
 # Lista Individual de Estados
 @app.route('/seleccionEstado', methods=['POST'])
 def seleccionEstado():
-    codigo = request.form['codigoBarras']
-    cursor = conn.cursor()
-    cursor.execute(
-        'Select idEstado, nombre, siglas from RH.Estado where idestado={0}'.format(codigo))
-    data = cursor.fetchall()
-    return render_template('Estado/ConsultaGeneralEstado.html', estados=data)
+        codigo = request.form['codigoBarras']
+        cursor = conn.cursor()
+        cursor.execute(
+            'Select idEstado, nombre, siglas from RH.Estado where idestado={0}'.format(codigo))
+        data = cursor.fetchall()
+        page, per_page, offset = get_page_args(page_parameter='page',
+                                            per_page_parameter='per_page')
+        total = len(users)
+        pagination_users = get_users(offset=offset, per_page=per_page)
+        pagination = Pagination(page=page, per_page=per_page, total=total,
+                                css_framework='bootstrap4')
+
+        if data:
+            reg = data
+        else:
+            return '<h1>NO EXISTE EL REGISTRO</h1>'
+
+        return render_template('Estado/ConsultaGeneralEstado.html',
+                            estados= reg,
+                            page=page,
+                            per_page=per_page,
+                            pagination=pagination)
 
 
 
@@ -515,7 +668,22 @@ def seleccionPuesto():
     cursor.execute(
         'Select *from RH.Puestos where idPuesto={0}'.format(codigo))
     data = cursor.fetchall()
-    return render_template('Puestos/ConsultaGeneralPuestos.html', puestos=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Puestos/ConsultaGeneralPuestos.html',
+                           puestos=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -598,7 +766,22 @@ def seleccionHorarios():
     cursor.execute(
        'Select *from RH.Horarios where idHorario={0}'.format(codigo))
     data = cursor.fetchall()
-    return render_template('Horarios/ConsultaGeneralHorarios.html', horarios=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Horarios/ConsultaGeneralHorarios.html',
+                           horarios=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -703,7 +886,22 @@ def seleccionEmpleados():
                    ' fechaNacimiento, salario,nss, estadoCivil, diasVacaciones, diasPermiso, fotografia, direccion, colonia,'
                     'codigoPostal, escolaridad, porcentajeComision from RH.Empleados where idEmpleado={0}'.format(codigo))
     data = cursor.fetchall()
-    return render_template('Empleados/ConsultaGeneralEmpleados.html', empleados=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Empleados/ConsultaGeneralEmpleados.html',
+                           empleados=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
@@ -812,7 +1010,22 @@ def seleccionDepartamento():
     cursor.execute(
         'Select *from RH.Departamentos where idDepartamento={0}'.format(codigo))
     data = cursor.fetchall()
-    return render_template('Departamentos/ConsultaGeneralDepartamentos.html', departamentos=data)
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Departamentos/ConsultaGeneralDepartamentos.html',
+                           departamentos=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 
