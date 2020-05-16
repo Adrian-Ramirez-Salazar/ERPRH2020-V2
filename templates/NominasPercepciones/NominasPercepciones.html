@@ -4,7 +4,7 @@
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
 
-	<title> RH | Consulta General de Departamentos</title>
+	<title> RH | NominasPercepciones</title>
 	<meta charset="utf-8">
 
 	<meta name="viewport" content="width=device-width, scale = 1.0">
@@ -16,60 +16,60 @@
 </head>
 
 <header id="MENU">
-	{% include 'Comunes/header.html' %}
-	</header>
+	 {% include 'Comunes/header.html' %}
+</header>
 
 
 <body>
-<center>
 	<main>
 		<br> <br> <br>
-		<div class="container" style="...">
-			<h1> CONSULTA DE DEPARTAMENTOS </h1><bR>
-			<a href="/nuevoDepartamento" class="btn btn-primary"><img
+		<div class="container" style="text-align: center;">
+			<h1> CONSULTA DE NOMINAS PERCEPCIONES </h1><bR>
+			<a href="/NuevaNominaPercepcion" class="btn btn-primary"><img
 					src="../../static/imagenes/add.gif">Nuevo</a><br><br>
 
 
-			<form action="/seleccionDepartamento" method="post">
+			<form action="/seleccionNominasPercepciones" method="post">
 				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
 			<br>
-			{{pagination.info}}
 
+
+{{pagination.info}}
 			<table id="datos" class="table">
 				<thead>
 					<tr>
-						<td>ID</td>
-						<td>NOMBRE</td>
+						<th>IDNOMINA</th>
+						<th>IDPERCEPCION</th>
+						<th>IMPORTE</th>
 						<th>EDITAR</th>
 						<th>ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for dep in departamentos %}
+					{% for perc in percepciones %}
 					<tr>
-						<td>{{dep.0 + (page - 1) * per_page}}</td>
-						<td>{{dep.1}}</td>
-							<td>
-							<a href="/editarDepartamento/{{dep.0}}"><img src="../../static/imagenes/editar.jpeg">
-							</a>
-							</td>
+						<td>{{perc.0 + (page - 1) * per_page}}</td>
+						<td>{{perc.1}}</td>
+						<td>{{perc.2}}</td>
 						<td>
-							<a href="/eliminarDepartamento/{{dep.0}}"><img src="../../static/imagenes/eliminar.jpeg">
-							</a>
-						</td>
+							<a href="/editarNominaPercepcion/{{perc.0}}"><img src="../../static/imagenes/editar.jpeg">
+							</a></td>
+						<td>
+							<a href="/eliminarNominaPercepcion/{{perc.0}}"><img src="../../static/imagenes/eliminar.jpeg">
+							</a></td>
 					</tr>
 					{% endfor %}
+				</tbody>
 			</table>
-									{{pagination.links}}
+{{pagination.links}}
 
-				<br>
+			<br>
 			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
 		</div>
 
 	</main><br>
-</center>
 </body>
 
   {% include 'Comunes/footer.html' %}
