@@ -19,11 +19,7 @@ def get_users(offset=0, per_page=10):
 app.secret_key=b'yangars'
 
 conn = pyodbc.connect('Driver={SQL Server};'
-<<<<<<< HEAD
                       'Server=DESKTOP-8SKO2G9\SQLEXPRESS;'
-=======
-                      'Server=DESKTOP-7SLALA5\SQLEXPRESS;'
->>>>>>> 57633791dbf063cec196fb37a10f56cc3e080159
                       'Database=ERP2020;'
                       'Trusted_Connection=yes;')
 cursor = conn.cursor()
