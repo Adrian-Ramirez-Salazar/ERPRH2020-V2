@@ -1,0 +1,113 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Nueva AusenciaJustificada</title>
+    <meta charset="utf-8">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> NUEVA AUSENCIA JUSTIFICADA </h1><br>
+            <center>
+
+                <div class="col-sm-4">
+                    <form action="/insertarAusenciaJustificada" method="post">
+
+                        <table>
+                            <!--tr>
+                                <td>
+                                    <label>ID:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required name="id">
+                                </td>
+                            </tr-->
+                            <tr>
+                                <td>
+                                    <label>IDAUSENCIA</label>
+                                </td>
+                                <td>
+                                    <input type="text"  placeholder=" " required name="idausencia">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>FECHASOLICITUD</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder="Ingresa la fecha "  required name="fechasolicitud">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>FECHAINICIO</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder=" "  required name="fechainicio">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>FECHAFIN</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder="Ingresa la fecha "  required name="fechafin">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>TIPO</label>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Ingresa el tipo "  required name="tipo">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>IDEMPLEADOS</label>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder=" "  required name="idempleados">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>IDEMPLEADOA</label>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder=" "  required name="idempleadoa">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/AusenciasJustificadas" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+  {% include 'Comunes/footer.html' %}
+
+</html>
