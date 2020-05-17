@@ -1,0 +1,146 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Editar Nomina</title>
+    <meta charset="utf-8">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> EDITAR NOMINA  </h1><br>
+            <center>
+
+                <div class="col-sm-4">
+                    <form action="/actualizarNomina/{{nom.0}}" method="post">
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>IDNOMINA:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required name="id" value="{{nom.0}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>fechaPago:</label>
+                                </td>
+                                <td>
+                                    <input type="date" required name="fechaPago" placeholder=" "
+                                        value="{{nom.1}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>totalP:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required name="totalPago" placeholder="ingresa el total pagar"
+                                        value="{{nom.2}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>totalD:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required min="1"  name="totalDeduccion" placeholder="Ingresa el total de la deduccion"
+                                        value="{{nom.3}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>cantidadNeta:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required min="1"  name="cantidadNeta" placeholder="Ingresa la cantidad neta"
+                                        value="{{nom.4}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>diasTrabajados:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required min="1"  name="diasTrabajados" placeholder="Ingresa los dias trabajados"
+                                        value="{{nom.5}}">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <label>faltas:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required min="1"  name="faltas" placeholder="Ingresa las faltas"
+                                        value="{{nom.6}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>fechaInicio:</label>
+                                </td>
+                                <td>
+                                    <input type="date" required min="1"  name="fechaInicio" placeholder="Ingresa la fecha de inicio"
+                                        value="{{nom.7}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>fechaFin:</label>
+                                </td>
+                                <td>
+                                    <input type="date" required min="1"  name="fechaFin" placeholder="Ingresa la fecha fin"
+                                        value="{{nom.8}}">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>idEmpleado:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required min="1"  name="idEmpleado" placeholder=""
+                                        value="{{nom.9}}">
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/Nominas" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+  {% include 'Comunes/footer.html' %}
+</html>

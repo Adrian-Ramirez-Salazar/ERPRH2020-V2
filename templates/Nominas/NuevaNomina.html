@@ -1,0 +1,138 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Nueva Nomina</title>
+    <meta charset="utf-8">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> NUEVA NOMINA </h1><br>
+            <center>
+
+                <div class="col-sm-4">
+                    <form action="/insertarNomina" method="post">
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>ID:</label>
+                                </td>
+                                <td>
+                                    <input type="number" required name="id">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>fechaPago</label>
+                                </td>
+                                <td>
+                                    <input type="date"  placeholder=" " required name="fechaPago">
+                                </td>
+                            </tr>
+                                  
+                            <tr>
+                                <td>
+                                    <label>totalP</label>
+                                </td>
+                                <td>
+                                    <input type="number"  placeholder=" " required name="totalPagar">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>totalD</label>
+                                </td>
+                                <td>
+                                    <input type="number"  placeholder=" " required name="totalDeducciones">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>cantidadNeta</label>
+                                </td>
+                                <td>
+                                    <input type="number"  placeholder=" " required name="cantidadNeta">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>diasTrabajados</label>
+                                </td>
+                                <td>
+                                    <input type="number"  placeholder=" " required name="diasTrabajados">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>faltas</label>
+                                </td>
+                                <td>
+                                    <input type="number"  placeholder=" " required name="faltas">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>fechaInicio</label>
+                                </td>
+                                <td>
+                                    <input type="date"  placeholder=" " required name="fechaInicio">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>fechaFIn</label>
+                                </td>
+                                <td>
+                                    <input type="date"  placeholder=" " required name="fechaFin">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>idEmpleado</label>
+                                </td>
+                                <td>
+                                    <input type="number"  placeholder=" " required name="idEmpleado">
+                                </td>
+                            </tr>
+                            
+                        </table>
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/Nominas" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+  {% include 'Comunes/footer.html' %}
+
+</html>

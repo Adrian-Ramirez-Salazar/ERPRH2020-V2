@@ -1,0 +1,89 @@
+<!Doctype html>
+<html>
+
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+	<title> RH | Nominas</title>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, scale = 1.0">
+	<link rel="stylesheet" href="CSS/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+	 {% include 'Comunes/header.html' %}
+</header>
+
+
+<body>
+	<main>
+		<br> <br> <br>
+		<div class="container" style="text-align: center;">
+			<h1> CONSULTA DE NOMINAS </h1><bR>
+			<a href="/NuevaNomina" class="btn btn-primary"><img
+					src="../../static/imagenes/add.gif">Nuevo</a><br><br>
+
+
+			<form action="/seleccionNominas" method="post">
+				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
+				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
+			</form>
+			<br>
+
+
+{{pagination.info}}
+			<table id="datos" class="table">
+				<thead>
+					<tr>
+						<th>idNomina</th>
+						<th>fechaPago</th>
+						<th>totalP</th>
+						<th>totalD</th>
+						<th>cantidadNeta</th>
+						<th>diasTrabajados</th>
+						<th>faltas</th>
+						<th>fechaInicio</th>
+						<th>fechaFin</th>
+						<th>idEmpleado</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for nom in nominas %}
+					<tr>
+						<td>{{nom.0 + (page - 1) * per_page}}</td>
+						<td>{{nom.1}}</td>
+						<td>{{nom.2}}</td>
+						<td>{{nom.3}}</td>
+						<td>{{nom.4}}</td>
+						<td>{{nom.5}}</td>
+						<td>{{nom.6}}</td>
+						<td>{{nom.7}}</td>
+						<td>{{nom.8}}</td>
+						<td>{{nom.9}}</td>						
+						<td>
+							<a href="/editarNomina/{{nom.0}}"><img src="../../static/imagenes/editar.jpeg">
+							</a></td>
+						<td>
+							<a href="/eliminarNomina/{{nom.0}}"><img src="../../static/imagenes/eliminar.jpeg">
+							</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+{{pagination.links}}
+
+			<br>
+			<a href="/Regresar" class="btn btn-danger">Regresar</a><BR>
+		</div>
+
+	</main><br>
+</body>
+
+  {% include 'Comunes/footer.html' %}
+
+</html>
