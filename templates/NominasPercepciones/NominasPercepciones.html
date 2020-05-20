@@ -41,24 +41,24 @@
 				<thead>
 					<tr>
 						<th>IDNOMINA</th>
-						<th>IDPERCEPCION</th>
+						<th>PERCEPCION</th>
 						<th>IMPORTE</th>
 						<th>EDITAR</th>
 						<th>ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for perc in percepciones %}
+					{% for nperc in nominasPercepciones %}
 					<tr>
-						<td>{{perc.0 + (page - 1) * per_page}}</td>
-						<td>{{perc.1}}</td>
-						<td>{{perc.2}}</td>
+						<td>{{nperc.0 + (page - 1) * per_page}}</td>
+						<td>{{nperc.1}}</td>
+						<td>{{nperc.2}}</td>
 						<td>
-							<a href="/editarNominaPercepcion/{{perc.0}}"><img src="../../static/imagenes/editar.jpeg">
-							</a></td>
+							<a href="/editarNominaPercepcion/{{nperc.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
+						</td>
 						<td>
-							<a href="/eliminarNominaPercepcion/{{perc.0}}"><img src="../../static/imagenes/eliminar.jpeg">
-							</a></td>
+							<a href="/eliminarNominaPercepcion/{{nperc.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>

@@ -25,33 +25,16 @@
             <center>
 
                 <div class="col-sm-4">
-                    <form action="/actualizarNominaDeduccion/{{dedu.0}}" method="post">
+                    <form action="/actualizarNominaDeduccion/{{nomdedu.0}}" method="post">
 
                         <table>
-                            <!--tr>
-                                <td>
-                                    <label>ID:</label>
-                                </td>
-                                <td>
-                                    <input type="number" required name="id" value="{{perce.0}}">
-                                </td>
-                            </tr-->
-                            <tr>
-                                <td>
-                                    <label>IDNOMINA:</label>
-                                </td>
-                                <td>
-                                    <input type="text" required name="idnomina" placeholder=" "
-                                        value="{{dedu.0}}">
-                                </td>
-                            </tr>
+
                             <tr>
                                 <td>
                                     <label>IDDEDUCCION:</label>
                                 </td>
                                 <td>
-                                    <input type="text" required name="iddeduccion" placeholder=" "
-                                        value="{{dedu.1}}">
+                                    <input type="text" required name="iddeduccion" placeholder=" " value="{{nomdedu.1}}">
                                 </td>
                             </tr>
                             <tr>
@@ -59,8 +42,7 @@
                                     <label>IMPORTE:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required min="1"  name="importe" placeholder="Ingresa el importe"
-                                        value="{{dedu.2}}">
+                                    <input type="number" required min="1"  name="importe" value="{{nomdedu.2}}">
                                 </td>
                             </tr>
                         </table>

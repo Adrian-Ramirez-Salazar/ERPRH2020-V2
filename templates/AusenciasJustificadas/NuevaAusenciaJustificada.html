@@ -29,25 +29,11 @@
                     <form action="/insertarAusenciaJustificada" method="post">
 
                         <table>
-                            <!--tr>
-                                <td>
-                                    <label>ID:</label>
-                                </td>
-                                <td>
-                                    <input type="number" required name="id">
-                                </td>
-                            </tr-->
+
+
                             <tr>
                                 <td>
-                                    <label>IDAUSENCIA</label>
-                                </td>
-                                <td>
-                                    <input type="text"  placeholder=" " required name="idausencia">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>FECHASOLICITUD</label>
+                                    <label>FECHA SOLICITUD</label>
                                 </td>
                                 <td>
                                     <input type="date" placeholder="Ingresa la fecha "  required name="fechasolicitud">
@@ -55,7 +41,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label>FECHAINICIO</label>
+                                    <label>FECHA INICIO</label>
                                 </td>
                                 <td>
                                     <input type="date" placeholder=" "  required name="fechainicio">
@@ -63,7 +49,7 @@
                             </tr>
                              <tr>
                                 <td>
-                                    <label>FECHAFIN</label>
+                                    <label>FECHA FIN</label>
                                 </td>
                                 <td>
                                     <input type="date" placeholder="Ingresa la fecha "  required name="fechafin">
@@ -74,15 +60,15 @@
                                     <label>TIPO</label>
                                 </td>
                                 <td>
-                                    <input type="text" placeholder="Ingresa el tipo "  required name="tipo">
+                                    <input type="text" max="1" min="1" placeholder="Ingresa el tipo "  required name="tipo">
                                 </td>
                             </tr>
                              <tr>
                                 <td>
-                                    <label>IDEMPLEADOS</label>
+                                    <label>ID EMPLEADOS</label>
                                 </td>
                                 <td>
-                                    <input type="text" placeholder=" "  required name="idempleados">
+                                    <input type="number"  min="1" placeholder=" "  required name="idempleados">
                                 </td>
                             </tr>
                              <tr>
@@ -90,7 +76,7 @@
                                     <label>IDEMPLEADOA</label>
                                 </td>
                                 <td>
-                                    <input type="text" placeholder=" "  required name="idempleadoa">
+                                    <input type="number" min="1" placeholder=" "  required name="idempleadoa">
                                 </td>
                             </tr>
                         </table>

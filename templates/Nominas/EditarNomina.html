@@ -28,22 +28,13 @@
                     <form action="/actualizarNomina/{{nom.0}}" method="post">
 
                         <table>
-                            <tr>
-                                <td>
-                                    <label>IDNOMINA:</label>
-                                </td>
-                                <td>
-                                    <input type="number" required name="id" value="{{nom.0}}">
-                                </td>
-                            </tr>
 
                             <tr>
                                 <td>
                                     <label>fechaPago:</label>
                                 </td>
                                 <td>
-                                    <input type="date" required name="fechaPago" placeholder=" "
-                                        value="{{nom.1}}">
+                                    <input type="date" required name="fechaPago" value="{{nom.1}}">
                                 </td>
                             </tr>
 
@@ -52,8 +43,7 @@
                                     <label>totalP:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required name="totalPago" placeholder="ingresa el total pagar"
-                                        value="{{nom.2}}">
+                                    <input type="number" min="0" required name="totalPago" value="{{nom.2}}">
                                 </td>
                             </tr>
 
@@ -62,8 +52,7 @@
                                     <label>totalD:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required min="1"  name="totalDeduccion" placeholder="Ingresa el total de la deduccion"
-                                        value="{{nom.3}}">
+                                    <input type="number" required min="0"  name="totalDeduccion" value="{{nom.3}}">
                                 </td>
                             </tr>
 
@@ -72,8 +61,7 @@
                                     <label>cantidadNeta:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required min="1"  name="cantidadNeta" placeholder="Ingresa la cantidad neta"
-                                        value="{{nom.4}}">
+                                    <input type="number" required min="0"  name="cantidadNeta" value="{{nom.4}}">
                                 </td>
                             </tr>
 
@@ -82,8 +70,7 @@
                                     <label>diasTrabajados:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required min="1"  name="diasTrabajados" placeholder="Ingresa los dias trabajados"
-                                        value="{{nom.5}}">
+                                    <input type="number" required min="1"  name="diasTrabajados" value="{{nom.5}}">
                                 </td>
                             </tr>
                             
@@ -92,8 +79,7 @@
                                     <label>faltas:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required min="1"  name="faltas" placeholder="Ingresa las faltas"
-                                        value="{{nom.6}}">
+                                    <input type="number" required min="0"  name="faltas" value="{{nom.6}}">
                                 </td>
                             </tr>
 
@@ -102,8 +88,7 @@
                                     <label>fechaInicio:</label>
                                 </td>
                                 <td>
-                                    <input type="date" required min="1"  name="fechaInicio" placeholder="Ingresa la fecha de inicio"
-                                        value="{{nom.7}}">
+                                    <input type="date" required min="1"  name="fechaInicio" value="{{nom.7}}">
                                 </td>
                             </tr>
 
@@ -112,8 +97,7 @@
                                     <label>fechaFin:</label>
                                 </td>
                                 <td>
-                                    <input type="date" required min="1"  name="fechaFin" placeholder="Ingresa la fecha fin"
-                                        value="{{nom.8}}">
+                                    <input type="date" required min="1"  name="fechaFin" value="{{nom.8}}">
                                 </td>
                             </tr>
 
@@ -122,8 +106,7 @@
                                     <label>idEmpleado:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required min="1"  name="idEmpleado" placeholder=""
-                                        value="{{nom.9}}">
+                                    <input type="number" required min="1"  name="idEmpleado" value="{{nom.9}}">
                                 </td>
                             </tr>
 

@@ -48,16 +48,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for dedu in deducciones %}
+					{% for ndedu in nominasdeducciones %}
 					<tr>
-						<td>{{dedu.0 + (page - 1) * per_page}}</td>
-						<td>{{dedu.1}}</td>
-						<td>{{dedu.2}}</td>
+						<td>{{ndedu.0 + (page - 1) * per_page}}</td>
+						<td>{{ndedu.1}}</td>
+						<td>{{ndedu.2}}</td>
 						<td>
-							<a href="/editarNominaDeduccion/{{perc.0}}"><img src="../../static/imagenes/editar.jpeg">
+							<a href="/editarNominaDeduccion/{{ndedu.0}}"><img src="../../static/imagenes/editar.jpeg">
 							</a></td>
 						<td>
-							<a href="/eliminarNominaDedcuccion/{{perc.0}}"><img src="../../static/imagenes/eliminar.jpeg">
+							<a href="/eliminarNominaDedcuccion/{{ndedu.0}}"><img src="../../static/imagenes/eliminar.jpeg">
 							</a></td>
 					</tr>
 					{% endfor %}

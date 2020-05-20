@@ -28,14 +28,6 @@
                     <form action="/insertarNomina" method="post">
 
                         <table>
-                            <tr>
-                                <td>
-                                    <label>ID:</label>
-                                </td>
-                                <td>
-                                    <input type="number" required name="id">
-                                </td>
-                            </tr>
 
                             <tr>
                                 <td>
@@ -51,7 +43,7 @@
                                     <label>totalP</label>
                                 </td>
                                 <td>
-                                    <input type="number"  placeholder=" " required name="totalPagar">
+                                    <input type="number" min="0" placeholder=" " required name="totalPagar">
                                 </td>
                             </tr>
 
@@ -60,7 +52,7 @@
                                     <label>totalD</label>
                                 </td>
                                 <td>
-                                    <input type="number"  placeholder=" " required name="totalDeducciones">
+                                    <input type="number"  min="0" placeholder=" " required name="totalDeducciones">
                                 </td>
                             </tr>
 
@@ -69,7 +61,7 @@
                                     <label>cantidadNeta</label>
                                 </td>
                                 <td>
-                                    <input type="number"  placeholder=" " required name="cantidadNeta">
+                                    <input type="number"  min="0" placeholder=" " required name="cantidadNeta">
                                 </td>
                             </tr>
 
@@ -78,7 +70,7 @@
                                     <label>diasTrabajados</label>
                                 </td>
                                 <td>
-                                    <input type="number"  placeholder=" " required name="diasTrabajados">
+                                    <input type="number" min="1" placeholder=" " required name="diasTrabajados">
                                 </td>
                             </tr>
 
@@ -87,7 +79,7 @@
                                     <label>faltas</label>
                                 </td>
                                 <td>
-                                    <input type="number"  placeholder=" " required name="faltas">
+                                    <input type="number" min="0" placeholder=" " required name="faltas">
                                 </td>
                             </tr>
 
@@ -102,7 +94,7 @@
 
                             <tr>
                                 <td>
-                                    <label>fechaFIn</label>
+                                    <label>fechaFin</label>
                                 </td>
                                 <td>
                                     <input type="date"  placeholder=" " required name="fechaFin">
@@ -114,7 +106,7 @@
                                     <label>idEmpleado</label>
                                 </td>
                                 <td>
-                                    <input type="number"  placeholder=" " required name="idEmpleado">
+                                    <input type="number" min="1" placeholder=" " required name="idEmpleado">
                                 </td>
                             </tr>
                             
@@ -131,6 +123,7 @@
                 </div>
             </center>
         </div>
+    </main>
 </body>
 
   {% include 'Comunes/footer.html' %}

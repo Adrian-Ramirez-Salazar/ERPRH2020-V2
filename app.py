@@ -85,7 +85,7 @@ def Deducciones():
     if data:
         reg = data
     return render_template('Deducciones/Deducciones.html',
-                           deducciones=reg,
+                           deducciones=data,
                            page = page,
                            per_page = per_page,
                            pagination = pagination)
@@ -107,7 +107,7 @@ def Percepcciones():
     if data:
         reg = data
     return render_template('Percepciones/ConsultaGeneralPercepciones.html',
-                           percepciones=reg,
+                           percepciones=data,
                            page=page,
                            per_page=per_page,
                            pagination=pagination
@@ -130,7 +130,7 @@ def Ciudades():
     if data:
         reg = data
     return render_template('Ciudades/ConsultaGeneralCiudad.html',
-                           ciudades=reg,
+                           ciudades=data,
                            page = page,
                            per_page = per_page,
                            pagination = pagination)
@@ -152,7 +152,7 @@ def Estado():
     if data:
         reg = data
     return render_template('Estado/ConsultaGeneralEstado.html',
-                           estados= reg,
+                           estados= data,
                            page=page,
                            per_page=per_page,
                            pagination=pagination)
@@ -174,7 +174,7 @@ def Puestos():
     if data:
         reg = data
     return render_template('Puestos/ConsultaGeneralPuestos.html',
-                           puestos=reg,
+                           puestos=data,
                            page=page,
                            per_page=per_page,
                            pagination=pagination)
@@ -196,7 +196,7 @@ def Horarios():
     if data:
         reg = data
     return render_template('Horarios/ConsultaGeneralHorarios.html',
-                           horarios=reg,
+                           horarios=data,
                            page=page,
                            per_page=per_page,
                            pagination=pagination)
@@ -218,7 +218,7 @@ def Empleados():
     if data:
         reg = data
     return render_template('Empleados/ConsultaGeneralEmpleados.html',
-                           empleados=reg,
+                           empleados=data,
                            page=page,
                            per_page=per_page,
                            pagination=pagination)
@@ -240,11 +240,101 @@ def Departamentos():
     if data:
         reg = data
     return render_template('Departamentos/ConsultaGeneralDepartamentos.html',
-                           departamentos=reg,
+                           departamentos=data,
                            page=page,
                            per_page=per_page,
                            pagination=pagination)
 
+
+
+@app.route('/Nominas')
+def Nominas():
+        cursor = conn.cursor()
+        cursor.execute('SELECT n.idNomina, n.fechaPago, n.totalP,n.totalD, n.cantidadNeta, n.diasTrabajados, n.faltas,'
+        'n.fechaInicio, n.fechaFin, e.nombre+' '+e.apaterno+' '+e.amaterno FROM RH.Nominas n join RH.Empleados e '
+        'on n.idEmpleado=e.idEmpleado;')
+        data = cursor.fetchall()
+        page, per_page, offset = get_page_args(page_parameter='page',
+                                               per_page_parameter='per_page')
+        total = len(users)
+        pagination_users = get_users(offset=offset, per_page=per_page)
+        pagination = Pagination(page=page, per_page=per_page, total=total,
+                                css_framework='bootstrap4')
+
+        if data:
+            reg = data
+        return render_template('Nominas/Nominas.html',
+                               nominas=data,
+                               page=page,
+                               per_page=per_page,
+                               pagination=pagination)
+
+
+
+
+
+@app.route('/NominasPercepciones')
+def NominasPercepciones():
+        cursor = conn.cursor()
+        cursor.execute('SELECT np.idNomina,p.descripcion, np.importe FROM RH.NominasPercepciones np join RH.Percepciones p '
+        'on np.idPercepcion=p.idPercepcion;')
+        data = cursor.fetchall()
+        page, per_page, offset = get_page_args(page_parameter='page',
+                                                   per_page_parameter='per_page')
+        total = len(users)
+        pagination_users = get_users(offset=offset, per_page=per_page)
+        pagination = Pagination(page=page, per_page=per_page, total=total,
+                                    css_framework='bootstrap4')
+
+        if data:
+            reg = data
+        return render_template('NominasPercepciones/NominasPercepciones.html',
+                                nominasPercepciones=data,
+                                page=page,
+                                per_page=per_page,
+                                pagination=pagination)
+
+@app.route('/NominasDeducciones')
+def NominasDeducciones():
+            cursor = conn.cursor()
+            cursor.execute(
+                'select nd.idNomina, d.nombre, nd.importe from RH.NominasDeducciones nd join RH.Deducciones d '
+            'on nd.idDeduccion=d.idDeduccion;')
+            data = cursor.fetchall()
+            page, per_page, offset = get_page_args(page_parameter='page',
+                                                   per_page_parameter='per_page')
+            total = len(users)
+            pagination_users = get_users(offset=offset, per_page=per_page)
+            pagination = Pagination(page=page, per_page=per_page, total=total,
+                                    css_framework='bootstrap4')
+
+            if data:
+                reg = data
+            return render_template('NominasDeducciones/NominasDeducciones.html',
+                                   nominasdeducciones=data,
+                                   page=page,
+                                   per_page=per_page,
+                                   pagination=pagination)
+
+@app.route('/AusenciasJustificadas')
+def AusenciasJustificadas():
+                cursor = conn.cursor()
+                cursor.execute('SELECT *FROM RH.AusenciasJustificadas;')
+                data = cursor.fetchall()
+                page, per_page, offset = get_page_args(page_parameter='page',
+                                                       per_page_parameter='per_page')
+                total = len(users)
+                pagination_users = get_users(offset=offset, per_page=per_page)
+                pagination = Pagination(page=page, per_page=per_page, total=total,
+                                        css_framework='bootstrap4')
+
+                if data:
+                    reg = data
+                return render_template('AusenciasJustificadas/AusenciasJustificadas.html',
+                                       justificada=data,
+                                       page=page,
+                                       per_page=per_page,
+                                       pagination=pagination)
 
 
 
@@ -333,9 +423,6 @@ def actualizarDeduccion(id):
                    ,(nombre,descripcion,porcentaje,id))
     conn.commit()
     return redirect('/Deducciones')
-
-
-
 
 
 
@@ -1058,6 +1145,397 @@ def actualizarDepartamento(id):
         'Update RH.Departamentos set nombre=? where nombre=?;' , (nombre, id))
     conn.commit()
     return redirect('/Departamentos')
+
+
+
+
+
+
+                                                  #DIFERENTES CONSULTAS PARA LAS NOMINAS
+#nueva Nomina
+@app.route('/NuevaNomina')
+def nuevaNomina():
+    return render_template('Nominas/NuevaNomina.html')
+
+
+#Insertar un nueva Nomina
+@app.route('/insertarNomina', methods=['POST'])
+def insertarNomina():
+    try:
+        fechaPago = request.form['fechaPago']
+        totalPagar = request.form['totalPagar']
+        totalDeducciones = request.form['totalDeducciones']
+        cantidadNeta = request.form['cantidadNeta']
+        diasTrabajados = request.form['diasTrabajados']
+        faltas = request.form['faltas']
+        fechaInicio = request.form['fechaInicio']
+        fechaFin = request.form['fechaFin']
+        idEmpleado = request.form['idEmpleado']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.Nominas (fechaPago,totalP,totalD,cantidadNeta,diasTrabajados,faltas,fechaInicio,fechaFin,idEmpleado) VALUES (?,?,?,?,?,?,?,?,?)',
+            (fechaPago,totalPagar,totalDeducciones,cantidadNeta,diasTrabajados,faltas,fechaInicio,fechaFin,idEmpleado ))
+        conn.commit()
+    except:
+        return '<h1>La Fecha de Pago tiene que ser mayor a la Fecha de Inicio / Algun Registro hace referencia a un campo vacio</h1>'
+    return redirect('/Nominas')
+
+
+
+
+# Lista Individual de Departamentos
+@app.route('/seleccionNominas', methods=['POST'])
+def seleccionNomina():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.Nominas where idNomina={0}'.format(codigo))
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Nominas/Nominas.html',
+                           nominas=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+# Eliminar algun registro de las Nominas
+@app.route('/eliminarNomina/<string:id>')
+def eliminarNomina(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.Nominas where idNomina={0}'.format(id))
+    conn.commit()
+    return redirect('/Nominas')
+
+
+
+
+# Editar Nomina
+@app.route('/editarNomina/<id>')
+def editarNomina(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.Nominas where idNomina={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('Nominas/EditarNomina.html', nom=data[0])
+
+
+
+# Actualizar el registro editado
+@app.route('/actualizarNomina/<id>', methods=['POST'])
+def actualizarNomina(id):
+    fechaPago = request.form['fechaPago']
+    totalPagar = request.form['totalPago']
+    totalDeducciones = request.form['totalDeduccion']
+    cantidadNeta = request.form['cantidadNeta']
+    diasTrabajados = request.form['diasTrabajados']
+    faltas = request.form['faltas']
+    fechaInicio = request.form['fechaInicio']
+    fechaFin = request.form['fechaFin']
+    idEmpleado = request.form['idEmpleado']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.Nominas set fechaPago=?, totalP=?, totalD=?, cantidadNeta=?, diasTrabajados=?, faltas=?, fechaInicio=?,'
+    'fechaFin=?, idEmpleado=? where idNomina=?;' , (fechaPago,totalPagar,totalDeducciones,cantidadNeta,diasTrabajados,faltas,
+                                                    fechaInicio,fechaFin,idEmpleado, id))
+    conn.commit()
+    return redirect('/Nominas')
+
+
+
+
+
+
+                                            #DIFERENTES CONSULTAS PARA NOMINAS PERCEPCIONES
+#nueva NominaPercepcion
+@app.route('/NuevaNominaPercepcion')
+def nuevaNominaPercepcion():
+    return render_template('NominasPercepciones/NuevaNominaPercepcion.html')
+
+
+
+#Insertar un nueva NominaPercepcion
+@app.route('/insertarNominaPercepcion', methods=['POST'])
+def insertarNominaPercepcion():
+        idnominapercepcion = request.form['idnominapercepcion']
+        idpercepcion = request.form['idpercepcion']
+        importe = request.form['importe']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.NominasPercepciones (idNomina,idPercepcion,importe) VALUES (?,?,?)',
+            (idnominapercepcion,idpercepcion,importe))
+        conn.commit()
+        return redirect('/NominasPercepciones')
+
+
+
+
+# Lista Individual de NominasPercepciones
+@app.route('/seleccionNominasPercepciones', methods=['POST'])
+def seleccionNominaPercepcion():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.NominasPercepciones where idNomina={0}'.format(codigo))
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('NominasPercepciones/NominasPercepciones.html',
+                           nominasPercepciones=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+
+# Eliminar algun registro de las NominasPercepciones
+@app.route('/eliminarNominaPercepcion/<string:id>')
+def eliminarNominaPercepcion(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.NominasPercepciones where idNomina={0}'.format(id))
+    conn.commit()
+    return redirect('/NominasPercepciones')
+
+
+
+# Editar Nomina Percepcion
+@app.route('/editarNominaPercepcion/<id>')
+def editarNominaPercepcion(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.NominasPercepciones where idNomina={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('NominasPercepciones/EditarNominaPercepcion.html', perce=data[0])
+
+
+
+# Actualizar el registro editado
+@app.route('/actualizarNominaPercepcion/<id>', methods=['POST'])
+def actualizarNominaPercepcion(id):
+    idpercepcion = request.form['idpercepcion']
+    importe = request.form['importe']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.NominasPercepciones set idPercepcion=?, importe=? where idNomina=?;' ,
+        (idpercepcion,importe, id))
+    conn.commit()
+    return redirect('/NominasPercepciones')
+
+
+
+
+
+
+                                            #ALGUNAS CONSULTAS PARA NOMINAS DEDUCCIONES
+#nueva NominaPercepcion
+@app.route('/NuevaNominaDeduccion')
+def nuevaNominaDeduccion():
+    return render_template('NominasDeducciones/NuevaNominaDeduccion.html')
+
+
+
+#Insertar un nueva NominaPercepcion
+@app.route('/insertarNominaDeduccion', methods=['POST'])
+def insertarNominaDeduccion():
+    try:
+        idnomina = request.form['idnomina']
+        iddeduccion = request.form['iddeduccion']
+        importe = request.form['importe']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.NominasDeducciones (idNomina,idDeduccion,importe) VALUES (?,?,?)',
+            (idnomina,iddeduccion,importe))
+        conn.commit()
+    except:
+        return 'Se esta haciendo referencia a un campo vacio'
+    return redirect('/NominasDeducciones')
+
+
+
+
+# Lista Individual de NominasPercepciones
+@app.route('/seleccionNominasDeducciones', methods=['POST'])
+def seleccionNominaDeduccion():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.NominasDeducciones where idNomina={0}'.format(codigo))
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('NominasDeducciones/NominasDeducciones.html',
+                           nominasdeducciones=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+# Eliminar algun registro de las NominasDeducciones
+@app.route('/eliminarNominaDedcuccion/<string:id>')
+def eliminarNominaDeduccion(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.NominasDeducciones where idNomina={0}'.format(id))
+    conn.commit()
+    return redirect('/NominasDeducciones')
+
+
+
+# Editar Nomina Deducciones
+@app.route('/editarNominaDeduccion/<id>')
+def editarNominaDeduccion(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.NominasDeducciones where idNomina={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('NominasDeducciones/EditarNominaDeduccion.html', nomdedu=data[0])
+
+
+
+# Actualizar el registro editado
+@app.route('/actualizarNominaDeduccion/<id>', methods=['POST'])
+def actualizarNominaDeduccion(id):
+    iddeduccion = request.form['iddeduccion']
+    importe = request.form['importe']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.NominasDeducciones set idDeduccion=?, importe=? where idNomina=?;' ,
+        (iddeduccion,importe, id))
+    conn.commit()
+    return redirect('/NominasDeducciones')
+
+
+
+
+
+
+
+                                        #ALGUNAS CONSULTAS PARA AUSENCIAS JUSTIFICADAS
+#Nueva Ausencia Justificada
+@app.route('/NuevaAusenciaJustificada')
+def NuevaAusenciaJustificada():
+    return render_template('AusenciasJustificadas/NuevaAusenciaJustificada.html')
+
+
+
+#Insertar un nueva NominaPercepcion
+@app.route('/insertarAusenciaJustificada', methods=['POST'])
+def insertarAusenciaJustificada():
+    try:
+       # idausencia = request.form['idausencia']
+        fechasolicitud = request.form['fechasolicitud']
+        fechainicio = request.form['fechainicio']
+        fechafin = request.form['fechafin']
+        tipo = request.form['tipo']
+        idempleados = request.form['idempleados']
+        idempleadoa = request.form['idempleadoa']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.AusenciasJustificadas (fechaSolicitud, fechaInicio, fechaFin, tipo, idEmpleadoS, idEmpleadoA) VALUES (?,?,?,?,?,?)',
+            (fechasolicitud,fechainicio,fechafin,tipo,idempleados,idempleadoa))
+        conn.commit()
+    except:
+        return 'Se esta haciendo referencia a un campo vacio'
+    return redirect('/AusenciasJustificadas')
+
+
+
+
+
+# Lista Individual de AusenciasJustificadas
+@app.route('/seleccionAusenciaJustificada', methods=['POST'])
+def seleccionAusenciaJustificada():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.AusenciasJustificadas where idAusencia={0}'.format(codigo))
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('AusenciasJustificadas/AusenciasJustificadas.html',
+                           justificada=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+
+# Eliminar algun registro de las AusenciasJustificadas
+@app.route('/eliminarAusenciaJustificada/<string:id>')
+def eliminarAusenciasJustificadas(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.AusenciasJustificadas where idAusencia={0}'.format(id))
+    conn.commit()
+    return redirect('/AusenciasJustificadas')
+
+
+
+
+# Editar Ausencias Justificadas
+@app.route('/editarAusenciaJustificada/<id>')
+def editarAusenciaJustificada(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.AusenciasJustificadas where idAusencia={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('AusenciasJustificadas/EditarAusenciaJustificada.html', ausen=data[0])
+
+
+
+
+# Actualizar el registro editado
+@app.route('/actualizarAusenciaJustificada/<id>', methods=['POST'])
+def actualizarAusenciaJustificada(id):
+    fechaSolicitud = request.form['fechaSolicitud']
+    fechaInicio = request.form['fechaInicio']
+    fechaFin = request.form['fechaFin']
+    tipo = request.form['tipo']
+    idempleados = request.form['idempleados']
+    idempleadoa = request.form['idempleadoa']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.AusenciasJustificadas set  fechaSolicitud=?, fechaInicio=?, fechaFin=?, tipo=?, idEmpleadoS=?, idEmpleadoA=? where idAusencia=?;' ,
+        (fechaSolicitud,fechaInicio,fechaFin,tipo,idempleados,idempleadoa, id))
+    conn.commit()
+    return redirect('/AusenciasJustificadas')
+
+
 
 
 

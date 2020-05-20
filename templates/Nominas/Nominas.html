@@ -41,15 +41,17 @@
 				<thead>
 					<tr>
 						<th>idNomina</th>
-						<th>fechaPago</th>
-						<th>totalP</th>
-						<th>totalD</th>
-						<th>cantidadNeta</th>
-						<th>diasTrabajados</th>
-						<th>faltas</th>
-						<th>fechaInicio</th>
-						<th>fechaFin</th>
-						<th>idEmpleado</th>
+						<th>FechaPago</th>
+						<th>TotalP</th>
+						<th>TotalD</th>
+						<th>Cantidad Neta</th>
+						<th>Dias Trabajados</th>
+						<th>Faltas</th>
+						<th>Fecha Inicio</th>
+						<th>Fecha Fin</th>
+						<th>Empleado</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -66,11 +68,11 @@
 						<td>{{nom.8}}</td>
 						<td>{{nom.9}}</td>						
 						<td>
-							<a href="/editarNomina/{{nom.0}}"><img src="../../static/imagenes/editar.jpeg">
-							</a></td>
+							<a href="/editarNomina/{{nom.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
+						</td>
 						<td>
-							<a href="/eliminarNomina/{{nom.0}}"><img src="../../static/imagenes/eliminar.jpeg">
-							</a></td>
+							<a href="/eliminarNomina/{{nom.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>

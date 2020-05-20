@@ -52,9 +52,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for ausencia justificada %}
+					{% for ausen in justificada %}
 					<tr>
-						<td>{{ausen.0 + (page - 1) * ause_page}}</td>
+						<td>{{ausen.0 + (page - 1) * per_page}}</td>
 						<td>{{ausen.1}}</td>
 						<td>{{ausen.2}}</td>
                         <td>{{ausen.3}}</td>
@@ -62,10 +62,10 @@
                         <td>{{ausen.5}}</td>
                         <td>{{ausen.6}}</td>
 						<td>
-							<a href="/editarAusenciaJustificada/{{perc.0}}"><img src="../../static/imagenes/editar.jpeg">
+							<a href="/editarAusenciaJustificada/{{ausen.0}}"><img src="../../static/imagenes/editar.jpeg">
 							</a></td>
 						<td>
-							<a href="/eliminarAusenciaJustificada/{{perc.0}}"><img src="../../static/imagenes/eliminar.jpeg">
+							<a href="/eliminarAusenciaJustificada/{{ausen.0}}"><img src="../../static/imagenes/eliminar.jpeg">
 							</a></td>
 					</tr>
 					{% endfor %}

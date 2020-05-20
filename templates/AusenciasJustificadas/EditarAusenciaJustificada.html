@@ -28,49 +28,28 @@
                     <form action="/actualizarAusenciaJustificada/{{ausen.0}}" method="post">
 
                         <table>
-                            <!--tr>
-                                <td>
-                                    <label>ID:</label>
-                                </td>
-                                <td>
-                                    <input type="number" required name="id" value="{{perce.0}}">
-                                </td>
-                            </tr-->
-                            
                             <tr>
                                 <td>
-                                    <label>IDAUSENCIA:</label>
+                                    <label>FECHA SOLICITUD</label>
                                 </td>
                                 <td>
-                                    <input type="text"  placeholder=" " required name="idausencia"
-                                        value="{{ausen.0}}">
+                                    <input type="date" name="fechaSolicitud" value="{{ausen.1}}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>FECHASOLICITUD</label>
+                                    <label>FECHA INICIO</label>
                                 </td>
                                 <td>
-                                    <input type="date" placeholder="Ingresa la fecha "  required name="fechasolicitud"
-                                    value="{{ausen.1}}">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>FECHAINICIO</label>
-                                </td>
-                                <td>
-                                    <input type="date" placeholder=" "  required name="fechainicio"
-                                    value="{{ausen.2}}">
+                                    <input type="date" name="fechaInicio" value="{{ausen.2}}">
                                 </td>
                             </tr>
                              <tr>
                                 <td>
-                                    <label>FECHAFIN</label>
+                                    <label>FECHA FIN</label>
                                 </td>
                                 <td>
-                                    <input type="date" placeholder="Ingresa la fecha "  required name="fechafin"
-                                    value="{{ausen.3}}">
+                                    <input type="date" name="fechaFin" value="{{ausen.3}}">
                                 </td>
                             </tr>
                              <tr>
@@ -78,26 +57,23 @@
                                     <label>TIPO</label>
                                 </td>
                                 <td>
-                                    <input type="text" placeholder="Ingresa el tipo "  required name="tipo"
-                                    value="{{ausen.4}}">
+                                    <input type="text" name="tipo" value="{{ausen.4}}">
                                 </td>
                             </tr>
                              <tr>
                                 <td>
-                                    <label>IDEMPLEADOS</label>
+                                    <label>ID EMPLEADOS</label>
                                 </td>
                                 <td>
-                                    <input type="text" placeholder=" "  required name="idempleados"
-                                    value="{{ausen.5}}">
+                                    <input type="number" min="1" name="idempleados"  value="{{ausen.5}}">
                                 </td>
                             </tr>
                              <tr>
                                 <td>
-                                    <label>IDEMPLEADOA</label>
+                                    <label>ID EMPLEADOA</label>
                                 </td>
                                 <td>
-                                    <input type="text" placeholder=" "  required name="idempleadoa"
-                                    value="{{ausen.6}}">
+                                    <input type="number" min="1" name="idempleadoa"   value="{{ausen.6}}">
                                 </td>
                             </tr>
                         </table>
@@ -113,6 +89,7 @@
                 </div>
             </center>
         </div>
+    </main>
 </body>
 
   {% include 'Comunes/footer.html' %}

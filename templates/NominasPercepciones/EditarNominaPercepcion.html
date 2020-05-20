@@ -28,30 +28,13 @@
                     <form action="/actualizarNominaPercepcion/{{perce.0}}" method="post">
 
                         <table>
-                            <!--tr>
-                                <td>
-                                    <label>ID:</label>
-                                </td>
-                                <td>
-                                    <input type="number" required name="id" value="{{perce.0}}">
-                                </td>
-                            </tr-->
-                            <tr>
-                                <td>
-                                    <label>IDNOMINA:</label>
-                                </td>
-                                <td>
-                                    <input type="text" required name="idnomina" placeholder=" "
-                                        value="{{perce.0}}">
-                                </td>
-                            </tr>
+
                             <tr>
                                 <td>
                                     <label>IDPERCEPCION:</label>
                                 </td>
                                 <td>
-                                    <input type="text" required name="idpercepcion" placeholder=" "
-                                        value="{{perce.1}}">
+                                    <input type="text" required name="idpercepcion" placeholder=" "value="{{perce.1}}">
                                 </td>
                             </tr>
                             <tr>
@@ -59,8 +42,7 @@
                                     <label>IMPORTE:</label>
                                 </td>
                                 <td>
-                                    <input type="number" required min="1"  name="importe" placeholder="Ingresa el importe"
-                                        value="{{perce.2}}">
+                                    <input type="number" required min="1"  name="importe" value="{{perce.2}}">
                                 </td>
                             </tr>
                         </table>
@@ -76,6 +58,7 @@
                 </div>
             </center>
         </div>
+    </main>
 </body>
 
   {% include 'Comunes/footer.html' %}
