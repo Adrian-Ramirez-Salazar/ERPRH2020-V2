@@ -64,9 +64,6 @@
                         <th>CP</th>
                         <th>ESCOLARIDAD</th>
                         <th>COMISION</th>
-                        <!--th>DEPARTAMENTO</th>
-                        <th>PUESTO</th>
-                        <th>CIUDAD</th-->
 						<th>Editar</th>
 						<th>Eliminar</th>
 					</tr>
@@ -86,15 +83,14 @@
 						<td>{{emple.9}}</td>
 						<td>{{emple.10}}</td>
 						<td>{{emple.11}}</td>
-						<td><a href="/consultaImagen"><img src="{{emple.12}}"></a></td>
+						<form action="/consultaImagen" method="post">
+						<td><img src="{{emple.12}}"></td>
+						</form>
 						<td>{{emple.13}}</td>
 						<td>{{emple.14}}</td>
 						<td>{{emple.15}}</td>
 						<td>{{emple.16}}</td>
 						<td>{{emple.17}}</td>
-						<!--td>{{emple.18}}</td>
-						<td>{{emple.19}}</td>
-						<td>{{emple.20}}</td-->
 						<td>
 							<a href="/editarEmpleado/{{emple.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
 						</td>

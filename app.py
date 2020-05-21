@@ -1013,10 +1013,13 @@ def editarEmpleado(id):
 
 
 
-@app.route("/consultaImagen/<id>")
-def consultaImagen(id):
-    img = Conexion.consultarFoto(id)
-    return img
+@app.route('/consultaImagen', methods=['POST'])
+def consultaImagen():
+    cursor = conn.cursor()
+    cursor.execute('Select fotografia from RH.Empleados;')
+    data = cursor.fetchall()
+    return render_template('/Empleados', empleados=data)
+
 
 
     # Actualizar el registro editado
@@ -1372,7 +1375,7 @@ def insertarNominaDeduccion():
 
 
 
-# Lista Individual de NominasPercepciones
+# Lista Individual de NominasDeducciones
 @app.route('/seleccionNominasDeducciones', methods=['POST'])
 def seleccionNominaDeduccion():
     codigo = request.form['codigoBarras']
@@ -1445,7 +1448,7 @@ def NuevaAusenciaJustificada():
 
 
 
-#Insertar un nueva NominaPercepcion
+#Insertar un nueva Ausencias Justificadas
 @app.route('/insertarAusenciaJustificada', methods=['POST'])
 def insertarAusenciaJustificada():
     try:
