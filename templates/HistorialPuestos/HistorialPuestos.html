@@ -4,7 +4,7 @@
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
 
-	<title> RH | Nominas</title>
+	<title> RH | Historial Puestos </title>
 	<meta charset="utf-8">
 
 	<meta name="viewport" content="width=device-width, scale = 1.0">
@@ -24,12 +24,12 @@
 	<main>
 		<br> <br> <br>
 		<div class="container" style="text-align: center;">
-			<h1> CONSULTA DE NOMINAS </h1><bR>
-			<a href="/NuevaNomina" class="btn btn-primary"><img
+			<h1> CONSULTA DE HISTORIAL PUESTOS </h1><bR>
+			<a href="/NuevoHistorialPuestos" class="btn btn-primary"><img
 					src="../../static/imagenes/add.gif">Nuevo</a><br><br>
 
 
-			<form action="/seleccionNominas" method="post">
+			<form action="/seleccionHistorialPuestos" method="post">
 				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">
 			</form>
@@ -40,39 +40,31 @@
 			<table id="datos" class="table">
 				<thead>
 					<tr>
-						<th>idNomina</th>
-						<th>Fecha Pago</th>
-						<th>Total Percepciones</th>
-						<th>Total Deducciones</th>
-						<th>Cantidad Neta</th>
-						<th>Dias Trabajados</th>
-						<th>Faltas</th>
-						<th>Fecha Inicio</th>
-						<th>Fecha Fin</th>
-						<th>Empleado</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
+						<th>IDEMPLEADO</th>
+   						<th>IDPUESTO</th>
+                        <th>IDDEPARTAMENTO</th>
+                        <th>FECHAINICIO</th>
+                        <th>FECHAFIN</th>
+                        <th>SALARIO</th>
+						<th>EDITAR</th>
+                       	<th>ELIMINAR</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for nom in nominas %}
+					{% for hisp in historial %}
 					<tr>
-						<td>{{nom.0 + (page - 1) * per_page}}</td>
-						<td>{{nom.1}}</td>
-						<td>{{nom.2}}</td>
-						<td>{{nom.3}}</td>
-						<td>{{nom.4}}</td>
-						<td>{{nom.5}}</td>
-						<td>{{nom.6}}</td>
-						<td>{{nom.7}}</td>
-						<td>{{nom.8}}</td>
-						<td>{{nom.9}}</td>						
+						<td>{{hisp.0 + (page - 1) * per_page}}</td>
+						<td>{{hisp.1}}</td>
+						<td>{{hisp.2}}</td>
+                        <td>{{hisp.3}}</td>
+                        <td>{{hisp.4}}</td>
+                        <td>{{hisp.5}}</td>
 						<td>
-							<a href="/editarNomina/{{nom.0}}"><img src="../../static/imagenes/editar.jpeg"></a>
-						</td>
+							<a href="/editarHistorialPuestos/{{hisp.0}}"><img src="../../static/imagenes/editar.jpeg">
+							</a></td>
 						<td>
-							<a href="/eliminarNomina/{{nom.0}}"><img src="../../static/imagenes/eliminar.jpeg"></a>
-						</td>
+							<a href="/eliminarHistorialPuestos/{{hisp.0}}"><img src="../../static/imagenes/eliminar.jpeg">
+							</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>

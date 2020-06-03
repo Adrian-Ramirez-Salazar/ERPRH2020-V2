@@ -206,7 +206,12 @@ def Horarios():
 @app.route('/Empleados')
 def Empleados():
     cursor = conn.cursor()
-    cursor.execute('Select *from RH.Empleados;')
+    cursor.execute('SELECT e.idEmpleado, e.nombre, e.apaterno, '
+                   'e.amaterno,  e.sexo, e.fechaContratacion,'
+                   'e.salario, d.nombre, p.nombre, c.nombre FROM ((( RH.Empleados e '
+                   'INNER JOIN RH.Departamentos d on e.idDepartamento = d.idDepartamento)'
+                   'inner JOIN RH.Ciudades c on e.idCiudad = c.idCiudad)'
+                   'inner join RH.Puestos p on e.idPuesto = p.idPuesto);')
     data = cursor.fetchall()
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
@@ -294,6 +299,8 @@ def NominasPercepciones():
                                 per_page=per_page,
                                 pagination=pagination)
 
+
+
 @app.route('/NominasDeducciones')
 def NominasDeducciones():
             cursor = conn.cursor()
@@ -316,6 +323,8 @@ def NominasDeducciones():
                                    per_page=per_page,
                                    pagination=pagination)
 
+
+
 @app.route('/AusenciasJustificadas')
 def AusenciasJustificadas():
                 cursor = conn.cursor()
@@ -335,6 +344,81 @@ def AusenciasJustificadas():
                                        page=page,
                                        per_page=per_page,
                                        pagination=pagination)
+
+
+
+@app.route('/DocumentacionEmpleado')
+def DocumentacionEmpleado():
+    cursor = conn.cursor()
+    cursor.execute('select *from RH.DocumentacionEmpleado;')
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    return render_template('DocumentacionEmpleado/DocumentacionEmpleado.html',
+                           documentacion=data,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+@app.route('/HistorialPuestos')
+def HistorialPuestos():
+        cursor = conn.cursor()
+        cursor.execute('select h.idEmpleado ,p.nombre, d.nombre, h.fechaInicio, h.fechaFin, h.salario from RH.HistorialPuestos h, rh.Empleados e, RH.Puestos p, rh.Departamentos d where h.idEmpleado=e.idEmpleado and h.idDepartamento=d.idDepartamento and h.idPuesto=p.idPuesto;')
+        data = cursor.fetchall()
+        page, per_page, offset = get_page_args(page_parameter='page',
+                                               per_page_parameter='per_page')
+        total = len(users)
+        pagination_users = get_users(offset=offset, per_page=per_page)
+        pagination = Pagination(page=page, per_page=per_page, total=total,
+                                css_framework='bootstrap4')
+
+        if data:
+            reg = data
+        return render_template('HistorialPuestos/HistorialPuestos.html',
+                               historial=data,
+                               page=page,
+                               per_page=per_page,
+                               pagination=pagination)
+
+
+
+
+@app.route('/Incapacidades')
+def Incapacidades():
+            cursor = conn.cursor()
+            cursor.execute('select i.idIncapacidad, i.fechaInicio, i.fechaFin,'
+                           ' i.enefermedad, e.nombre+' '+e.apaterno+'
+                           '+e.amaterno from RH.Incapacidades i, '
+                           'RH.Empleados e '
+                           'where i.idEmpleado = e.idEmpleado;')
+            data = cursor.fetchall()
+            page, per_page, offset = get_page_args(page_parameter='page',
+                                                   per_page_parameter='per_page')
+            total = len(users)
+            pagination_users = get_users(offset=offset, per_page=per_page)
+            pagination = Pagination(page=page, per_page=per_page, total=total,
+                                    css_framework='bootstrap4')
+
+            if data:
+                reg = data
+            return render_template('Incapacidades/Incapacidades.html',
+                                   incapacidades=data,
+                                   page=page,
+                                   per_page=per_page,
+                                   pagination=pagination)
+
+
+
+
 
 
 
@@ -1260,23 +1344,14 @@ def actualizarNomina(id):
 
 
                                             #DIFERENTES CONSULTAS PARA NOMINAS PERCEPCIONES
-#nueva NominaPercepcion
-@app.route('/NuevaNominaPercepcion')
-def nuevaNominaPercepcion():
-    return render_template('NominasPercepciones/NuevaNominaPercepcion.html')
-
-
 
 #Insertar un nueva NominaPercepcion
-@app.route('/insertarNominaPercepcion', methods=['POST'])
-def insertarNominaPercepcion():
-        idnominapercepcion = request.form['idnominapercepcion']
-        idpercepcion = request.form['idpercepcion']
-        importe = request.form['importe']
-        cursor = conn.cursor()
+@app.route('/calcularNominaP', methods=['POST'])
+def calcularNominaPercepcion():
         cursor.execute(
-            'INSERT INTO RH.NominasPercepciones (idNomina,idPercepcion,importe) VALUES (?,?,?)',
-            (idnominapercepcion,idpercepcion,importe))
+            'Insert into RH.NominasPercepciones select p.idPercepcion,'
+            ' sum(e.salario*p.diasPagar) salario from RH.Percepciones p'
+            '  join RH.Empleados e on p.idPercepcion = e.idEmpleado group by p.idPercepcion;')
         conn.commit()
         return redirect('/NominasPercepciones')
 
@@ -1539,6 +1614,317 @@ def actualizarAusenciaJustificada(id):
     return redirect('/AusenciasJustificadas')
 
 
+
+
+
+
+
+                                                #CONSULTAS PARA DOCUMENTACION EMPLEADO
+#Nueva Documentacion Empleado
+@app.route('/NuevaDocumentacionEmpleado')
+def NuevaDocumentacionEmpleado():
+    return render_template('DocumentacionEmpleado/NuevaDocumentacionEmpleado.html')
+
+
+
+#Insertar registro Documentacion Empleado
+@app.route('/insertarDocumentacionEmpleado', methods=['POST'])
+def insertarDocumentacionEmpleado():
+   # try:
+       # idausencia = request.form['idausencia']
+        nombredocumento = request.form['nombredocumento']
+        fechaentrega = request.form['fechaentrega']
+        documento = request.files['documento'].stream.read()
+        idempleado = request.form['idempleado']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.DocumentacionEmpleado (nombreDocumento, fechaEntrega, documento, idEmpleado) VALUES (?,?,?,?)',
+            (nombredocumento,
+             fechaentrega,
+             documento,
+             idempleado))
+        conn.commit()
+   # except:
+       # return ''
+        return redirect('/DocumentacionEmpleado')
+
+
+
+
+
+# Lista Individual de DocumentacionEmpleado
+@app.route('/seleccionDocumentacionEmpleado', methods=['POST'])
+def seleccionDocumentacionEmpleado():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.DocumentacionEmpleado where idDocumento={0}'.format(codigo))
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('DocumentacionEmpleado/DocumentacionEmpleado.html',
+                           documentacion=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+# Eliminar algun registro de DocumentacionEmpleado
+@app.route('/eliminarDocumentacionEmpleado/<string:id>')
+def eliminarDocumentacionEmpleado(id):
+        cursor = conn.cursor()
+        cursor.execute('Delete from RH.DocumentacionEmpleado where idDocumento={0}'.format(id))
+        conn.commit()
+        return redirect('/DocumentacionEmpleado')
+
+
+
+
+# editarDocumentacionEmpleado
+@app.route('/editarDocumentacionEmpleado/<id>')
+def editarDocumentacionEmpleado(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.DocumentacionEmpleado where idDocumento={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('DocumentacionEmpleado/EditarDocumentacionEmpleado.html', docu=data[0])
+
+
+
+
+# actualizarDocumentacionEmpleado
+@app.route('/actualizarDocumentacionEmpleado/<id>', methods=['POST'])
+def actualizarDocumentacionEmpleado(id):
+    nombredocumneto = request.form['nombredocumneto']
+    fechaentrega = request.form['fechaentrega']
+    documento = request.form['documento']
+    idempleado = request.form['idempleado']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.DocumentacionEmpleado set  nombreDocumento=?, fechaEntrega=?, documento=?, idEmpleado=? where idDocumento=?;' ,
+        (nombredocumneto,fechaentrega,documento,idempleado, id))
+    conn.commit()
+    return redirect('/DocumentacionEmpleado')
+
+
+
+
+
+
+
+
+                                                        #ALGUNAS CONSULTAS PARA HISTORIAL PUESTOS
+#Nueva HistorialPuestos
+@app.route('/NuevoHistorialPuestos')
+def NuevoHistorialPuestos():
+    return render_template('HistorialPuestos/NuevoHistorialPuestos.html')
+
+
+#insertarHistorialPuestos
+@app.route('/insertarHistorialPuestos', methods=['POST'])
+def insertarHistorialPuestos():
+    try:
+        idempleado = request.form['idempleado']
+        idpuesto = request.form['idpuesto']
+        iddepartamento = request.form['iddepartamento']
+        fechainicio = request.form['fechainicio']
+        fechafin = request.form['fechafin']
+        salario = request.form['salario']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.HistorialPuestos (idEmpleado, idPuesto, idDepartamento, fechaInicio, fechaFin, salario) VALUES (?, ?,?,?,?,?)',
+            (idempleado,
+             idpuesto,
+             iddepartamento,
+             fechainicio,
+             fechafin,
+             salario))
+        conn.commit()
+    except:
+        return 'Se esta haciendo referencia a un campo inexistente/vacio'
+    return redirect('/HistorialPuestos')
+
+
+
+
+# Lista Individual de HistorialPuestos
+@app.route('/seleccionHistorialPuestos', methods=['POST'])
+def seleccionHistorialPuestos():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.HistorialPuestos where idEmpleado={0}'.format(codigo))
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('HistorialPuestos/HistorialPuestos.html',
+                           historial=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+
+# Eliminar algun registro de HistorialPuestos
+@app.route('/eliminarHistorialPuestos/<string:id>')
+def eliminarHistorialPuestos(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.HistorialPuestos where idEmpleado={0}'.format(id))
+    conn.commit()
+    return redirect('/HistorialPuestos')
+
+
+
+
+# editarHistorialPuestos
+@app.route('/editarHistorialPuestos/<id>')
+def editarHistorialPuestos(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.HistorialPuestos where idEmpleado={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('HistorialPuestos/EditarHistorialPuestos.html', pues=data[0])
+
+
+
+
+# actualizarHistorialPuestos
+@app.route('/actualizarHistorialPuestos/<id>', methods=['POST'])
+def actualizarHistorialPuestos(id):
+    idempleado = request.form['idempleado']
+    idpuesto = request.form['idpuesto']
+    iddepartamento = request.form['iddepartamento']
+    fechainicio = request.form['fechainicio']
+    fechafin = request.form['fechafin']
+    salario = request.form['salario']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.HistorialPuestos set  idEmpleado=?, idPuesto=?, idDepartamento=?, fechaInicio=?, '
+        'fechaFin=?, salario=? where idEmpleado=?;' ,
+        (idempleado,idpuesto,iddepartamento,fechainicio,fechafin,salario, id))
+    conn.commit()
+    return redirect('/HistorialPuestos')
+
+
+
+
+
+
+
+                                                #ALGUNAS CONSULTAS PARA LAS INCAPACIDADES
+#Nueva HistorialPuestos
+@app.route('/NuevaIncapacidad')
+def NuevaIncapacidad():
+    return render_template('Incapacidades/NuevaIncapacidad.html')
+
+
+
+
+#insertarIncapacidad
+@app.route('/insertarIncapacidad', methods=['POST'])
+def insertarIncapacidad():
+    try:
+        fechainicio = request.form['fechainicio']
+        fechafin = request.form['fechafin']
+        enfermedad = request.form['enfermedad']
+        idempleado = request.form['idempleado']
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO RH.Incapacidades (fechaInicio, fechaFin, enefermedad, idEmpleado) VALUES (?,?,?,?)',
+            (fechainicio,
+             fechafin,
+             enfermedad,
+             idempleado))
+        conn.commit()
+    except:
+        return 'Se esta haciendo referencia a un campo inexistente/vacio'
+    return redirect('/Incapacidades')
+
+
+
+
+
+# Lista Individual de seleccionIncapacidades
+@app.route('/seleccionIncapacidades', methods=['POST'])
+def seleccionIncapacidades():
+    codigo = request.form['codigoBarras']
+    cursor = conn.cursor()
+    cursor.execute('Select *from RH.Incapacidades where idIncapacidad={0}'.format(codigo))
+    data = cursor.fetchall()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(users)
+    pagination_users = get_users(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
+
+    if data:
+        reg = data
+    else:
+        return '<h1>NO EXISTE EL REGISTRO</h1>'
+    return render_template('Incapacidades/Incapacidades.html',
+                           incapacidades=reg,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
+
+
+# Eliminar algun registro de Incapacidad
+@app.route('/eliminarIncapacidad/<string:id>')
+def eliminarIncapacidad(id):
+    cursor = conn.cursor()
+    cursor.execute('Delete from RH.Incapacidades where idIncapacidad={0}'.format(id))
+    conn.commit()
+    return redirect('/Incapacidades')
+
+
+
+
+# editarIncapacidad
+@app.route('/editarIncapacidad/<id>')
+def editarIncapacidad(id):
+    cursor = conn.cursor()
+    cursor.execute(
+        'Select *from RH.Incapacidades where idIncapacidad={0}'.format(id))
+    data = cursor.fetchall()
+    return render_template('Incapacidades/EditarIncapacidad.html', inca=data[0])
+
+
+
+
+# actualizarHistorialPuestos
+@app.route('/actualizarIncapacidades/<id>', methods=['POST'])
+def actualizarIncapacidades(id):
+    fechainicio = request.form['fechainicio']
+    fechafin = request.form['fechafin']
+    enfermedad = request.form['enfermedad']
+    idempleado = request.form['idempleado']
+    cursor = conn.cursor()
+    cursor.execute(
+        'Update RH.Incapacidades set  fechaInicio=?, fechaFin=?, enefermedad=?, idEmpleado=? where idIncapacidad=?;' ,
+        (fechainicio,fechafin,enfermedad,idempleado, id))
+    conn.commit()
+    return redirect('/Incapacidades')
 
 
 

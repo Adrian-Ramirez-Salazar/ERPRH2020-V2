@@ -25,10 +25,10 @@
 		<br> <br> <br>
 		<div class="container" style="text-align: center;">
 			<h1> CONSULTA DE NOMINAS PERCEPCIONES </h1><bR>
-			<a href="/NuevaNominaPercepcion" class="btn btn-primary"><img
-					src="../../static/imagenes/add.gif">Nuevo</a><br><br>
-
-
+			<form action="/calcularNominaP" method="post">
+				<button id="ventasB" type="submit" class="btn btn-success" role="button">Calcular Nominas Percepciones </button>
+			</form>
+<br>
 			<form action="/seleccionNominasPercepciones" method="post">
 				<button id="ventasB" type="submit" class="btn btn-primary" role="button">Buscar </button>
 				<input id="codigo" type="number" placeholder="Escribe el codigo" required name="codigoBarras">

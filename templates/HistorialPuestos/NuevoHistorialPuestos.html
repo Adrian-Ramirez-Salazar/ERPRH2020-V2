@@ -1,0 +1,99 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Nuevo HistorialPuestos</title>
+    <meta charset="utf-8">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> NUEVO HISTORIAL PUESTOS </h1><br>
+            <center>
+
+                <div class="col-sm-4">
+                    <form action="/insertarHistorialPuestos" method="post">
+
+                        <table>
+                             <tr>
+                                <td>
+                                    <label>ID EMPLEADO</label>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder=" "  required name="idempleado">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>ID PUESTO</label>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder=" "  required name="idpuesto">
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <td>
+                                    <label>ID DEPARTAMENTO</label>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder=" "  required name="iddepartamento">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>FECHA INICIO</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder=" "  required name="fechainicio">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>FECHA FIN</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder="Ingresa la fecha "  required name="fechafin">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>SALARIO</label>
+                                </td>
+                                <td>
+                                    <input class="campos" type="number" required name="salario">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/HistorialPuestos" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+  {% include 'Comunes/footer.html' %}
+
+</html>

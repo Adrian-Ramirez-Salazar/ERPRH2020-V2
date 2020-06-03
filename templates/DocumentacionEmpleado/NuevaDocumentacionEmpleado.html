@@ -1,0 +1,83 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Nueva DocumentacionEmpleado</title>
+    <meta charset="utf-8">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> NUEVA DOCUMENTACION EMPLEADO </h1><br>
+            <center>
+
+                <div class="col-sm-4">
+                    <form action="/insertarDocumentacionEmpleado" method="post" enctype="multipart/form-data">
+
+                        <table>
+
+
+                            <tr>
+                                <td>
+                                    <label>NOMBRE DEL DOCUMENTO</label>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Ingresa el nombre "  required name="nombredocumento">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>FECHA DE ENTREGA</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder=" "  required name="fechaentrega">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>DOCUMENTO</label>
+                                </td>
+                                <td>
+                                    <input type="file" placeholder=""  required name="documento">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>ID EMPLEADO</label>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder=" "  required name="idempleado">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/DocumentacionEmpleado" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+  {% include 'Comunes/footer.html' %}
+
+</html>

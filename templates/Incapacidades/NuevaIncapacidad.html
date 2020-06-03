@@ -1,0 +1,82 @@
+<!Doctype html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/imagenes/rh.ico">
+
+    <title> RH | Nueva Incapacidad</title>
+    <meta charset="utf-8">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/estilo.css">
+</head>
+
+<header id="MENU">
+    <img src="../../static/imagenes/RHH.png" width="70px" height="55px">
+
+
+</header>
+
+
+<body>
+    <main>
+        <div class="container" style="text-align: center;"><br>
+            <h1> NUEVA INCAPACIDAD </h1><br>
+            <center>
+
+                <div class="col-sm-4">
+                    <form action="/insertarIncapacidad" method="post">
+
+                        <table>
+
+                            <tr>
+                                <td>
+                                    <label>FECHA INICIO</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder=" "  required name="fechainicio">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>FECHA FIN</label>
+                                </td>
+                                <td>
+                                    <input type="date" placeholder="Ingresa la fecha "  required name="fechafin">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>ENFERMEDAD</label>
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Ingresa enfermedad"  required name="enfermedad">
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label>ID EMPLEADO</label>
+                                </td>
+                                <td>
+                                    <input type="number" placeholder=" "  required name="idempleado">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br> <br><br>
+                        <div class="form-group">
+                            <input type="submit" value="Guardar" class="btn btn-primary">
+
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <a href="/Incapacidades" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </center>
+        </div>
+</body>
+
+  {% include 'Comunes/footer.html' %}
+
+</html>
