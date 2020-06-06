@@ -1,9 +1,9 @@
 #import pypyodbc
 from flask import Flask, render_template, request, session, flash
 from flask_paginate import Pagination, get_page_args
-#from flask_sqlalchemy import SQLAlchemy
+import pandas as pd
 import pyodbc
-#from sqlalchemy.sql.functions import session_user
+from sqlalchemy import desc
 from werkzeug.utils import redirect
 #from Datos.DeduccionesDAO import DeduccionesDAO
 #from Datos.usuarioDAO import UsuarioDAO
@@ -251,6 +251,12 @@ def Departamentos():
                            pagination=pagination)
 
 
+#@app.route('/enviarEx', methods=['GET'])
+#def enviarEx():
+
+
+
+
 
 @app.route('/Nominas')
 def Nominas():
@@ -259,6 +265,7 @@ def Nominas():
         'n.fechaInicio, n.fechaFin, e.nombre+' '+e.apaterno+' '+e.amaterno FROM RH.Nominas n join RH.Empleados e '
         'on n.idEmpleado=e.idEmpleado;')
         data = cursor.fetchall()
+
         page, per_page, offset = get_page_args(page_parameter='page',
                                                per_page_parameter='per_page')
         total = len(users)
@@ -350,7 +357,7 @@ def AusenciasJustificadas():
 @app.route('/DocumentacionEmpleado')
 def DocumentacionEmpleado():
     cursor = conn.cursor()
-    cursor.execute('select *from RH.DocumentacionEmpleado;')
+    cursor.execute('Select d.idDocumento, d.nombreDocumento, d.fechaEntrega, d.documento, e.nombre+' '+e.apaterno+' '+e.amaterno from RH.DocumentacionEmpleado d, RH.Empleados e where d.idEmpleado = e.idEmpleado;')
     data = cursor.fetchall()
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
